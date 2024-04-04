@@ -1,0 +1,14 @@
+version: '3.9'
+
+services:
+  db:
+    container_name: travelpickup-mariadb
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: local
+      MYSQL_DATABASE: travelpickup
+      MYSQL_CHARACTER_SET_SERVER: utf8
+      MYSQL_COLLATION_SERVER: utf8_general_ci
+      TZ: Asia/Seoul
+    ports:
+      - "9306:3306"
