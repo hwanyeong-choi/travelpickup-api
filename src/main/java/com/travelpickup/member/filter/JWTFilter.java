@@ -1,7 +1,7 @@
 package com.travelpickup.member.filter;
 
 import com.travelpickup.member.dto.LoginUser;
-import com.travelpickup.util.JWTUtil;
+import com.travelpickup.member.util.JWTUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

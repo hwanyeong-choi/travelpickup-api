@@ -5,10 +5,8 @@ import com.travelpickup.member.domain.TravelPickupUser;
 import com.travelpickup.member.dto.KakaoTokenResponseDto;
 import com.travelpickup.member.dto.KakaoUserMeResponseDto;
 import com.travelpickup.member.dto.LoginResponseDto;
-import com.travelpickup.member.enums.LoginProvider;
 import com.travelpickup.member.repository.TravelPickupUserRepository;
-import com.travelpickup.util.JWTUtil;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import com.travelpickup.member.util.JWTUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

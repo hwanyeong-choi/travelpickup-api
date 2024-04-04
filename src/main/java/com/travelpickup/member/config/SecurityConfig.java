@@ -1,7 +1,7 @@
 package com.travelpickup.member.config;
 
 import com.travelpickup.member.filter.JWTFilter;
-import com.travelpickup.util.JWTUtil;
+import com.travelpickup.member.util.JWTUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
