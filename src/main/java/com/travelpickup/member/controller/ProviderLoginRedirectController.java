@@ -1,6 +1,7 @@
 package com.travelpickup.member.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +13,11 @@ import java.net.URI;
 @RequestMapping("/api/v1/login")
 public class ProviderLoginRedirectController {
 
-    private final String REDIRECT_URI = "https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=73b5d35c4547d14470278fb2eb47f6b0&redirect_uri=http://localhost:5173/kakao";
+    private final String kakaoLoginRedirectUri;
+
+    public ProviderLoginRedirectController(@Value("${kakao.redirect-login-uri}") String kakaoLoginRedirectUri) {
+        this.kakaoLoginRedirectUri = kakaoLoginRedirectUri;
+    }
 
     @GetMapping
     public ResponseEntity<String> getHello() {
@@ -23,7 +28,7 @@ public class ProviderLoginRedirectController {
     public ResponseEntity<Void> kakaoLoginRedirectUri() {
         return ResponseEntity
                 .status(HttpStatus.FOUND)
-                .location(URI.create(REDIRECT_URI))
+                .location(URI.create(kakaoLoginRedirectUri))
                 .build();
     }
 
