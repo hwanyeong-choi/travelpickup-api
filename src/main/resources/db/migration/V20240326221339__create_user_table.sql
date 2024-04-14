@@ -9,4 +9,4 @@ CREATE TABLE travelpickup_user (
     modify_at datetime(6) NOT NULL COMMENT '수정일',
     INDEX IDX_PROVIDER_ID (provider_id),
     primary key (id)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
