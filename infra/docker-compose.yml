@@ -25,9 +25,3 @@ services:
       - "./data:/var/lib/localstack"
     ports:
       - "4566:4566"
-
-    command: |
-      bash -c "
-        aws --endpoint-url=http://localstack:4566 s3 mb s3://${S3_BUCKET_NAME}
-        exec /app/start.sh
-      "
