@@ -1,4 +1,4 @@
-package com.travelpickup.pickup;
+package com.travelpickup.pickup.enums;
 
 import lombok.Getter;
 

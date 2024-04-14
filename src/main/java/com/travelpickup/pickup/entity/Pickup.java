@@ -1,6 +1,6 @@
 package com.travelpickup.pickup.entity;
 
-import com.travelpickup.pickup.PickupState;
+import com.travelpickup.pickup.enums.PickupState;
 import com.travelpickup.pickup.dto.PickUpRegisterRequestDto;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -10,9 +10,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 @Entity
