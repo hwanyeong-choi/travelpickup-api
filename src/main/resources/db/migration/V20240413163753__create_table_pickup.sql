@@ -12,22 +12,22 @@ CREATE TABLE pickup (
 
 DROP TABLE IF EXISTS pickup_location;
 CREATE TABLE pickup_location(
-    pickup_location_id BIGINT AUTO_INCREMENT,
+    pickup_location_id BIGINT AUTO_INCREMENT COMMENT  '픽업위치 아이디',
     pickup_id BIGINT COMMENT '픽업 아이디',
     description TEXT COMMENT '픽업 위치 상세내역',
     latitude DOUBLE NOT NULL COMMENT '픽업위치 위도',
-    longitude DOUBLE NOT NULL COMMENT '핍업위치 경도',
+    longitude DOUBLE NOT NULL COMMENT '픽업위치 경도',
     INDEX IDX_PICKUP_ID (pickup_id),
     PRIMARY KEY (pickup_location_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS destination_location;
 CREATE TABLE destination_location(
-    destination_location_id BIGINT AUTO_INCREMENT,
+    destination_location_id BIGINT AUTO_INCREMENT COMMENT '숙소위치 아이디',
     pickup_id BIGINT NOT NULL COMMENT '픽업 아이디',
     description TEXT COMMENT '픽업 위치 상세내역',
     latitude DOUBLE NOT NULL COMMENT '픽업위치 위도',
-    longitude DOUBLE NOT NULL COMMENT '핍업위치 경도',
+    longitude DOUBLE NOT NULL COMMENT '픽업위치 경도',
     INDEX IDX_PICKUP_ID (pickup_id),
     PRIMARY KEY (destination_location_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
