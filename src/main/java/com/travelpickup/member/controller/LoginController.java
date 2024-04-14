@@ -4,10 +4,7 @@ import com.travelpickup.member.dto.LoginResponseDto;
 import com.travelpickup.member.enums.LoginProvider;
 import com.travelpickup.member.service.KakaoOautService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -26,6 +23,5 @@ public class LoginController {
         LoginResponseDto loginResponseDto = kakaoLoginService.login(code);
         return ResponseEntity.ok(loginResponseDto);
     }
-
 
 }

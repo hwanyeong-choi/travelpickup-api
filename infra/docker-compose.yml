@@ -12,3 +12,22 @@ services:
       TZ: Asia/Seoul
     ports:
       - "9306:3306"
+
+  localstack:
+    image: localstack/localstack:latest
+    environment:
+      - SERVICES=s3
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_DEFAULT_REGION=us-east-1
+      - LOCALSTACK_INTERNAL_DATA_DIR=/var/lib/localstack
+    volumes:
+      - "./data:/var/lib/localstack"
+    ports:
+      - "4566:4566"
+
+    command: |
+      bash -c "
+        aws --endpoint-url=http://localstack:4566 s3 mb s3://${S3_BUCKET_NAME}
+        exec /app/start.sh
+      "
