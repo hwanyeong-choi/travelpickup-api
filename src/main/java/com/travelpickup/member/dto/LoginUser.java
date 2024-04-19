@@ -11,7 +11,6 @@ import java.util.Collection;
 import java.util.List;
 
 @Getter
-@Setter
 public class LoginUser implements UserDetails {
 
     private Long id;

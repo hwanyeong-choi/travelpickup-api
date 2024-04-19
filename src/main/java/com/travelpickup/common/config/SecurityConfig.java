@@ -1,4 +1,4 @@
-package com.travelpickup.member.config;
+package com.travelpickup.common.config;
 
 import com.travelpickup.member.filter.JWTFilter;
 import com.travelpickup.member.util.JWTUtil;
@@ -64,6 +64,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/v1/auth/**").permitAll()
                         .requestMatchers("/api/v1/login/**").permitAll()
+                        .requestMatchers("/api/v1/health/**").permitAll()
+                        .requestMatchers("/error").permitAll()
                         .anyRequest().authenticated());
 
         http
