@@ -1,9 +1,7 @@
 package com.travelpickup.member.controller;
 
-import com.travelpickup.common.ResponseDto;
 import com.travelpickup.member.dto.CurrentUser;
 import com.travelpickup.member.dto.LoginUser;
-import com.travelpickup.member.dto.TravelPickupUserMeResponseDto;
 import com.travelpickup.member.service.TravelPickupUserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +23,7 @@ public class TravelPickupUserController {
     public ResponseEntity<?> getTravelPickupUserInfo(@CurrentUser LoginUser loginUser) {
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(ResponseDto.createOk(travelPickupUserService.getTravelPickupUserInfo(loginUser.getId())));
+                .body(travelPickupUserService.getTravelPickupUserInfo(loginUser.getId()));
     }
 
 }

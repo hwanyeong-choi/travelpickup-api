@@ -24,8 +24,8 @@ public class PickupController {
 
     @PostMapping
     public ResponseEntity<String> pickupRegister(@CurrentUser LoginUser loginUser,
-                                                 @RequestPart PickUpRegisterRequestDto pickUpRegisterRequestDto,
-                                                 @RequestPart List<MultipartFile> pickupProductsPhotoFiles) throws IOException {
+                                                 @RequestPart(required = true) PickUpRegisterRequestDto pickUpRegisterRequestDto,
+                                                 @RequestPart(required = false) List<MultipartFile> pickupProductsPhotoFiles) throws IOException {
         pickupService.pickupSave(pickUpRegisterRequestDto, pickupProductsPhotoFiles, loginUser.getId());
         return ResponseEntity.status(HttpStatusCode.valueOf(201)).body("ok");
     }
