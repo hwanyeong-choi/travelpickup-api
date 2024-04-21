@@ -1,12 +1,14 @@
 package com.travelpickup.pickup.entity;
 
-import com.travelpickup.pickup.dto.PickupProductDto;
+import com.travelpickup.pickup.dto.request.PickupProductDto;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
+@NoArgsConstructor
 @Table(name = "pickup_product")
 public class PickupProduct {
 

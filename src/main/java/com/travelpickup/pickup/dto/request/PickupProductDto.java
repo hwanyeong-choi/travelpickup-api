@@ -1,4 +1,4 @@
-package com.travelpickup.pickup.dto;
+package com.travelpickup.pickup.dto.request;
 
 import lombok.Getter;
 import lombok.Setter;

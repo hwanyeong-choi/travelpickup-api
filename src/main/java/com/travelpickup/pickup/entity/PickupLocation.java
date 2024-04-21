@@ -1,16 +1,15 @@
 package com.travelpickup.pickup.entity;
 
-import com.travelpickup.pickup.dto.PlaceLocationDto;
+import com.travelpickup.pickup.dto.request.PickupLocationDto;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
 @Entity
-@Table(name = "pickup_location")
 @NoArgsConstructor
+@Table(name = "pickup_location")
 public class PickupLocation {
 
     @Id
@@ -41,13 +40,13 @@ public class PickupLocation {
         this.longitude = longitude;
     }
 
-    public static PickupLocation of(PlaceLocationDto placeLocationDto, Long pickupId) {
+    public static PickupLocation of(PickupLocationDto pickupLocationDto, Long pickupId) {
         return PickupLocation
                 .builder()
                 .pickupId(pickupId)
-                .description(placeLocationDto.getDescription())
-                .latitude(placeLocationDto.getLatitude())
-                .longitude(placeLocationDto.getLongitude())
+                .description(pickupLocationDto.getDescription())
+                .latitude(pickupLocationDto.getLatitude())
+                .longitude(pickupLocationDto.getLongitude())
                 .build();
     }
 

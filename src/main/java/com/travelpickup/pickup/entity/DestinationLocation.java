@@ -1,6 +1,6 @@
 package com.travelpickup.pickup.entity;
 
-import com.travelpickup.pickup.dto.PlaceLocationDto;
+import com.travelpickup.pickup.dto.request.PickupLocationDto;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -43,14 +43,14 @@ public class DestinationLocation {
         this.longitude = longitude;
     }
 
-    public static DestinationLocation of(PlaceLocationDto placeLocationDto,
+    public static DestinationLocation of(PickupLocationDto pickupLocationDto,
                                          Long pickupId) {
         return DestinationLocation
                 .builder()
                 .pickupId(pickupId)
-                .description(placeLocationDto.getDescription())
-                .latitude(placeLocationDto.getLatitude())
-                .longitude(placeLocationDto.getLongitude())
+                .description(pickupLocationDto.getDescription())
+                .latitude(pickupLocationDto.getLatitude())
+                .longitude(pickupLocationDto.getLongitude())
                 .build();
     }
 

@@ -1,8 +1,7 @@
-package com.travelpickup.pickup.dto;
+package com.travelpickup.pickup.dto.request;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -10,9 +9,9 @@ import java.util.List;
 @Setter
 public class PickUpRegisterRequestDto {
 
-    private PlaceLocationDto pickupLocation;
+    private PickupLocationDto pickupLocation;
 
-    private PlaceLocationDto descriptionLocation;
+    private PickupLocationDto descriptionLocation;
 
     private List<PickupProductDto> pickupProductDtoList;
 
