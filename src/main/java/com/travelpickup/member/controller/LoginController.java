@@ -1,6 +1,5 @@
 package com.travelpickup.member.controller;
 
-import com.travelpickup.common.ResponseDto;
 import com.travelpickup.member.dto.LoginResponseDto;
 import com.travelpickup.member.enums.LoginProvider;
 import com.travelpickup.member.service.KakaoOautService;
@@ -22,7 +21,7 @@ public class LoginController {
     public ResponseEntity login(@PathVariable(name = "provider", required = true) LoginProvider loginProvider,
                                 @PathVariable(name = "code", required = true) String code) {
         LoginResponseDto loginResponseDto = kakaoLoginService.login(code);
-        return ResponseEntity.status(HttpStatus.OK).body(ResponseDto.createOk(loginResponseDto));
+        return ResponseEntity.status(HttpStatus.OK).body(loginResponseDto);
 
     }
 
