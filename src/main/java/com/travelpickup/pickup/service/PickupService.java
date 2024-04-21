@@ -2,7 +2,7 @@ package com.travelpickup.pickup.service;
 
 import com.travelpickup.common.exception.TravelPickupServiceException;
 import com.travelpickup.common.service.AmazonS3Service;
-import com.travelpickup.pickup.dto.PickUpRegisterRequestDto;
+import com.travelpickup.pickup.dto.request.PickUpRegisterRequestDto;
 import com.travelpickup.pickup.entity.*;
 import com.travelpickup.pickup.error.PickpServiceErrorType;
 import com.travelpickup.pickup.repository.*;

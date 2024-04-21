@@ -8,7 +8,6 @@ import java.util.List;
 @Getter
 public enum PickupState {
 
-    PICKUP_PENDING("픽업 신청완료"),
     PICKUP_MAN_MATCHING("픽업맨 매칭중"),
     PICKUP_MAN_MATCHED("픽업맨 매칭 완료"),
     PICKUP_MAN_PICKUP_COMPLETE("픽업맨 픽업 완료"),
@@ -24,10 +23,15 @@ public enum PickupState {
 
     public static List<PickupState> getInProgressStateList() {
         return Arrays.asList(
-                PICKUP_MAN_MATCHING,
                 PICKUP_MAN_MATCHED,
                 PICKUP_MAN_PICKUP_COMPLETE,
                 PICKUP_MAN_DELIVERY_IN_PROGRESS);
+    }
+
+    public static List<PickupState> getCompletedStateList() {
+        return Arrays.asList(
+                PICKUP_MAN_DELIVERY_COMPLETED
+        );
     }
 
 }

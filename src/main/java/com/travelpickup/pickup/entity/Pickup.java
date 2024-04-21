@@ -1,7 +1,8 @@
 package com.travelpickup.pickup.entity;
 
+import com.travelpickup.common.util.DateConvertUtils;
 import com.travelpickup.pickup.enums.PickupState;
-import com.travelpickup.pickup.dto.PickUpRegisterRequestDto;
+import com.travelpickup.pickup.dto.request.PickUpRegisterRequestDto;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -44,14 +45,16 @@ public class Pickup {
         this.state = state;
     }
 
-    public static Pickup of(PickUpRegisterRequestDto pickUpRegisterRequestDto,
-                            Long userId) {
-
+    public static Pickup of(PickUpRegisterRequestDto pickUpRegisterRequestDto, Long userId) {
         return Pickup
                 .builder()
                 .userId(userId)
-                .state(PickupState.PICKUP_PENDING)
+                .state(PickupState.PICKUP_MAN_MATCHING)
                 .build();
+    }
+
+    public String getMyPickupFormatCreateAt() {
+        return DateConvertUtils.localDateConvert(this.createAt, DateConvertUtils.YYYY_DOT_MM_DOT_DD_PATTERN);
     }
 
 }
