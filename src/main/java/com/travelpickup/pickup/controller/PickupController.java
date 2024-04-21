@@ -5,7 +5,6 @@ import com.travelpickup.member.dto.LoginUser;
 import com.travelpickup.pickup.dto.response.MyPickupResponseDto;
 import com.travelpickup.pickup.dto.request.PickUpRegisterRequestDto;
 import com.travelpickup.pickup.dto.response.PickupDetailResponseDto;
-import com.travelpickup.pickup.dto.response.PickupResponseDto;
 import com.travelpickup.pickup.service.PickupSearchService;
 import com.travelpickup.pickup.service.PickupService;
 import org.springframework.http.HttpStatus;
@@ -30,7 +29,7 @@ public class PickupController {
     }
 
     @PostMapping
-    public ResponseEntity<String> pickupRegister(@CurrentUser LoginUser loginUser,
+    public ResponseEntity<String> registerPickup(@CurrentUser LoginUser loginUser,
                                                  @RequestPart(required = true) PickUpRegisterRequestDto pickUpRegisterRequestDto,
                                                  @RequestPart(required = false) List<MultipartFile> pickupProductsPhotoFiles) throws IOException {
         pickupService.pickupSave(pickUpRegisterRequestDto, pickupProductsPhotoFiles, loginUser.getId());
@@ -54,6 +53,15 @@ public class PickupController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(pickupDetailResponseDto);
+    }
+
+    @DeleteMapping("/{pickupId}")
+    public ResponseEntity<String> cancelPickup(@CurrentUser LoginUser loginUser,
+                                               @PathVariable(name = "pickupId", required = true) Long pickupId) {
+        pickupService.getPickupCancelAble(loginUser.getId(), pickupId);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("OK");
     }
 
 }

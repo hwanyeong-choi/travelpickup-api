@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 public class PickupResponseDto {
 
-    private Long pickupId;
+    private Long id;
 
     private PickupState state;
 
@@ -18,7 +18,7 @@ public class PickupResponseDto {
     public PickupResponseDto(Long pickupId,
                              PickupState state,
                              String createAt) {
-        this.pickupId = pickupId;
+        this.id = pickupId;
         this.state = state;
         this.createAt = createAt;
     }

@@ -9,13 +9,13 @@ import java.util.List;
 public class MyPickupResponseDto {
 
     private List<PickupResponseDto> inProgressPickList;
-    private List<PickupResponseDto> completedPickupList;
+    private List<PickupResponseDto> finishPickupList;
 
     @Builder
     public MyPickupResponseDto(List<PickupResponseDto> inProgressPickList,
-                               List<PickupResponseDto> completedPickupList) {
+                               List<PickupResponseDto> finishPickupList) {
         this.inProgressPickList = inProgressPickList;
-        this.completedPickupList = completedPickupList;
+        this.finishPickupList = finishPickupList;
     }
 
     public static MyPickupResponseDto of(List<PickupResponseDto> inProgressPickList,
@@ -23,7 +23,7 @@ public class MyPickupResponseDto {
         return MyPickupResponseDto
                 .builder()
                 .inProgressPickList(inProgressPickList)
-                .completedPickupList(completedPickupList)
+                .finishPickupList(completedPickupList)
                 .build();
     }
 

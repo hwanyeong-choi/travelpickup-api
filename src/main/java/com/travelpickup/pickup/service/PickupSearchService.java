@@ -32,7 +32,7 @@ public class PickupSearchService {
 
     private final String IN_PROGRESS_PICKUP_KEY = "IN_PROGRESS_PICKUP_KEY";
 
-    private final String COMPLETED_PICKUP_KEY = "COMPLETED_PICKUP_KEY";
+    private final String FINISH_PICKUP_KEY = "FINISH_PICKUP_KEY";
 
 
     public PickupSearchService(PickupRepository pickupRepository,
@@ -60,17 +60,17 @@ public class PickupSearchService {
 
         Map<String, List<PickupResponseDto>> pickupResponseMap =
                 pickupResponseDtoList.stream().collect(Collectors.groupingBy(pickupResponseDto -> {
-                            if(PickupState.getCompletedStateList().contains(pickupResponseDto.getState())) return COMPLETED_PICKUP_KEY;
+                            if(PickupState.getFinishStateList().contains(pickupResponseDto.getState())) return FINISH_PICKUP_KEY;
                             return IN_PROGRESS_PICKUP_KEY;}));
 
         return MyPickupResponseDto.of(pickupResponseMap.getOrDefault(IN_PROGRESS_PICKUP_KEY, Collections.emptyList()),
-                        pickupResponseMap.getOrDefault(COMPLETED_PICKUP_KEY, Collections.emptyList()));
+                        pickupResponseMap.getOrDefault(FINISH_PICKUP_KEY, Collections.emptyList()));
 
     }
 
     @Transactional(readOnly = true)
     public PickupDetailResponseDto getPickup(Long userId, Long pickupId) {
-        Optional<Pickup> optionalPickup = pickupRepository.findByUserIdAndPickupId(userId, pickupId);
+        Optional<Pickup> optionalPickup = getPickupByUserIdAndPickupId(userId, pickupId);
 
         if (optionalPickup.isEmpty()) {
             throw new TravelPickupServiceException(PickpServiceErrorType.INVALID_PICKUP_ID);
@@ -92,6 +92,11 @@ public class PickupSearchService {
                 pickupProductResponseDtoList
         );
 
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<Pickup> getPickupByUserIdAndPickupId(Long userId, Long pickupId) {
+        return pickupRepository.findByUserIdAndPickupId(userId, pickupId);
     }
 
 }

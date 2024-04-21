@@ -4,6 +4,7 @@ import com.travelpickup.common.exception.TravelPickupServiceException;
 import com.travelpickup.common.service.AmazonS3Service;
 import com.travelpickup.pickup.dto.request.PickUpRegisterRequestDto;
 import com.travelpickup.pickup.entity.*;
+import com.travelpickup.pickup.enums.PickupState;
 import com.travelpickup.pickup.error.PickpServiceErrorType;
 import com.travelpickup.pickup.repository.*;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -84,6 +86,23 @@ public class PickupService {
             pickupProductImgRepository.saveAll(pickupProductImgList);
 
         }
+
+    }
+
+    @Transactional(readOnly = false)
+    public void getPickupCancelAble(Long userId, Long pickupId) {
+        Optional<Pickup> optionalPickup = pickupRepository.findByUserIdAndPickupId(userId, pickupId);
+
+        if (optionalPickup.isEmpty()) {
+            throw new TravelPickupServiceException(PickpServiceErrorType.INVALID_PICKUP_ID);
+        }
+
+        if (optionalPickup.get().notCancelAble()) {
+            throw new TravelPickupServiceException(PickpServiceErrorType.CANNOT_CANCEL_PICKUP);
+        }
+
+        Pickup pickup = optionalPickup.get();
+        pickup.updatePickupState(PickupState.PICKUP_CANCEL);
 
     }
 
