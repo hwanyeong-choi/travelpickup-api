@@ -53,8 +53,16 @@ public class Pickup {
                 .build();
     }
 
+    public void updatePickupState(PickupState pickupState) {
+        this.state = pickupState;
+    }
+
     public String getMyPickupFormatCreateAt() {
         return DateConvertUtils.localDateConvert(this.createAt, DateConvertUtils.YYYY_DOT_MM_DOT_DD_PATTERN);
+    }
+
+    public boolean notCancelAble() {
+        return !PickupState.PICKUP_MAN_MATCHING.equals(this.state);
     }
 
 }
