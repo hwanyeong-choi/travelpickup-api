@@ -2,7 +2,6 @@ package com.travelpickup.pickup.entity;
 
 import com.travelpickup.common.util.DateConvertUtils;
 import com.travelpickup.pickup.enums.PickupState;
-import com.travelpickup.pickup.dto.request.PickUpRegisterRequestDto;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,6 +29,9 @@ public class Pickup {
     @Enumerated(EnumType.STRING)
     private PickupState state;
 
+    @Column(name = "center_id")
+    private Long centerId;
+
     @Column(name = "create_at")
     @CreationTimestamp
     private LocalDateTime createAt;
@@ -45,7 +47,7 @@ public class Pickup {
         this.state = state;
     }
 
-    public static Pickup of(PickUpRegisterRequestDto pickUpRegisterRequestDto, Long userId) {
+    public static Pickup of(Long userId) {
         return Pickup
                 .builder()
                 .userId(userId)
@@ -55,6 +57,10 @@ public class Pickup {
 
     public void updatePickupState(PickupState pickupState) {
         this.state = pickupState;
+    }
+
+    public void updatePickupCenterId(Long centerId) {
+        this.centerId = centerId;
     }
 
     public String getMyPickupFormatCreateAt() {

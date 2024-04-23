@@ -2,11 +2,13 @@ package com.travelpickup.pickup.service;
 
 import com.travelpickup.common.exception.TravelPickupServiceException;
 import com.travelpickup.pickup.dto.response.*;
+import com.travelpickup.pickup.entity.DestinationLocation;
 import com.travelpickup.pickup.entity.Pickup;
+import com.travelpickup.pickup.entity.PickupCenter;
 import com.travelpickup.pickup.enums.PickupState;
 import com.travelpickup.pickup.error.PickpServiceErrorType;
 import com.travelpickup.pickup.repository.DestinationLocationRepository;
-import com.travelpickup.pickup.repository.PickupLocationRepository;
+import com.travelpickup.pickup.repository.PickupCenterRepository;
 import com.travelpickup.pickup.repository.PickupProductRepository;
 import com.travelpickup.pickup.repository.PickupRepository;
 import org.springframework.stereotype.Service;
@@ -24,7 +26,7 @@ public class PickupSearchService {
 
     private final PickupRepository pickupRepository;
 
-    private final PickupLocationRepository pickupLocationRepository;
+    private final PickupCenterRepository pickupCenterRepository;
 
     private final DestinationLocationRepository destinationLocationRepository;
 
@@ -36,11 +38,11 @@ public class PickupSearchService {
 
 
     public PickupSearchService(PickupRepository pickupRepository,
-                               PickupLocationRepository pickupLocationRepository,
+                               PickupCenterRepository pickupCenterRepository,
                                DestinationLocationRepository destinationLocationRepository,
                                PickupProductRepository pickupProductRepository) {
         this.pickupRepository = pickupRepository;
-        this.pickupLocationRepository = pickupLocationRepository;
+        this.pickupCenterRepository = pickupCenterRepository;
         this.destinationLocationRepository = destinationLocationRepository;
         this.pickupProductRepository = pickupProductRepository;
     }
@@ -70,6 +72,7 @@ public class PickupSearchService {
 
     @Transactional(readOnly = true)
     public PickupDetailResponseDto getPickup(Long userId, Long pickupId) {
+
         Optional<Pickup> optionalPickup = getPickupByUserIdAndPickupId(userId, pickupId);
 
         if (optionalPickup.isEmpty()) {
@@ -77,8 +80,18 @@ public class PickupSearchService {
         }
 
         PickupResponseDto pickup = PickupResponseDto.of(optionalPickup.get());
-        PickupLocationResponseDto pickupLocation = PickupLocationResponseDto.of(pickupLocationRepository.findByPickupId(pickupId));
-        PickupLocationResponseDto destinationLocation = PickupLocationResponseDto.of(destinationLocationRepository.findByPickupId(pickupId));
+
+        PickupCenter pickupCenter = pickupCenterRepository
+                .findById(pickup.getCenterId())
+                .orElse(PickupCenter.createEmpty());
+
+        DestinationLocation destinationLocation = destinationLocationRepository
+                .findByPickupId(pickupId)
+                .orElse(DestinationLocation.createEmpty());
+
+        PickupCenterResponseDto pickupCenterResponseDto = PickupCenterResponseDto.of(pickupCenter);
+
+        DestinationLocationResponseDto destinationLocationResponseDto = DestinationLocationResponseDto.of(destinationLocation);
 
         List<PickupProductResponseDto> pickupProductResponseDtoList = pickupProductRepository.findByPickupId(pickupId)
                 .stream()
@@ -87,8 +100,8 @@ public class PickupSearchService {
 
         return PickupDetailResponseDto.of(
                 pickup,
-                pickupLocation,
-                destinationLocation,
+                pickupCenterResponseDto,
+                destinationLocationResponseDto,
                 pickupProductResponseDtoList
         );
 

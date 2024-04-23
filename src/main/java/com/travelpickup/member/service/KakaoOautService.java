@@ -41,7 +41,7 @@ public class KakaoOautService {
             return LoginResponseDto.of(
                     jwtUtil.createJwt(
                             saveTravelPickupUser.getId(),
-                            saveTravelPickupUser.getUserRole().name(),
+                            saveTravelPickupUser.getTravelPickupUserRole().name(),
                             60*60*60*3600L
                     ));
         }
@@ -52,7 +52,7 @@ public class KakaoOautService {
         return  LoginResponseDto.of(
                 jwtUtil.createJwt(
                         saveTravelPickupUser.getId(),
-                        saveTravelPickupUser.getUserRole().name(),
+                        saveTravelPickupUser.getTravelPickupUserRole().name(),
                         60*60*60*3600L
                 ));
 

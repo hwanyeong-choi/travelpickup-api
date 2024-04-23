@@ -9,8 +9,6 @@ import java.util.List;
 @Setter
 public class PickUpRegisterRequestDto {
 
-    private PickupLocationDto pickupLocation;
-
     private PickupLocationDto descriptionLocation;
 
     private List<PickupProductDto> pickupProductDtoList;
