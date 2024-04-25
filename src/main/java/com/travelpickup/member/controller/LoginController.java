@@ -17,11 +17,22 @@ public class LoginController {
         this.kakaoLoginService = kakaoLoginService;
     }
 
-    @PostMapping("/{provider}/{code}")
-    public ResponseEntity login(@PathVariable(name = "provider", required = true) LoginProvider loginProvider,
-                                @PathVariable(name = "code", required = true) String code) {
+    @PostMapping("/member/{provider}/{code}")
+    public ResponseEntity<LoginResponseDto> login(@PathVariable(name = "provider", required = true) LoginProvider loginProvider,
+                                                  @PathVariable(name = "code", required = true) String code) {
         LoginResponseDto loginResponseDto = kakaoLoginService.login(code);
-        return ResponseEntity.status(HttpStatus.OK).body(loginResponseDto);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(loginResponseDto);
+
+    }
+
+    @PostMapping("/admin/{provider}/{code}")
+    public ResponseEntity<LoginResponseDto> adminLogin(@PathVariable(name = "provider", required = true) LoginProvider loginProvider,
+                                                       @PathVariable(name = "code", required = true) String code) {
+        LoginResponseDto loginResponseDto = kakaoLoginService.adminLogin(code);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(loginResponseDto);
 
     }
 

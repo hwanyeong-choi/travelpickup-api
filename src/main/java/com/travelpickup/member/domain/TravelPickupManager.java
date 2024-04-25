@@ -2,19 +2,22 @@ package com.travelpickup.member.domain;
 
 import com.travelpickup.member.dto.KakaoUserMeResponseDto;
 import com.travelpickup.member.enums.LoginProvider;
+import com.travelpickup.member.enums.TravelPickupManagerRole;
 import com.travelpickup.member.enums.TravelPickupUserRole;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
-@Entity
 @Getter
-@Table(name = "travelpickup_user")
-public class TravelPickupUser {
+@Entity
+@NoArgsConstructor
+@Table(name = "travelpickup_manager")
+public class TravelPickupManager {
 
     @Id
     @Column(name = "id", nullable = false)
@@ -31,9 +34,12 @@ public class TravelPickupUser {
     @Column(name = "provider_id", unique = true, nullable = false)
     private Long providerId;
 
+    @Column(name = "center_id", nullable = true)
+    private Long centerId;
+
     @Column(name = "role", columnDefinition = "VARCHAR(100)", nullable = false)
     @Enumerated(value = EnumType.STRING)
-    private TravelPickupUserRole travelPickupUserRole;
+    private TravelPickupManagerRole travelPickupManagerRole;
 
     @CreationTimestamp
     @Column(name = "create_at", nullable = false)
@@ -43,29 +49,35 @@ public class TravelPickupUser {
     @Column(name = "modify_at", nullable = false)
     private LocalDateTime modifyAt;
 
-    public TravelPickupUser() {}
-
     @Builder
-    private TravelPickupUser(String nickName,
-                             LoginProvider provider,
-                             Long providerId,
-                             TravelPickupUserRole travelPickupUserRole) {
+    public TravelPickupManager(String nickName,
+                               LoginProvider provider,
+                               Long providerId,
+                               Long centerId,
+                               TravelPickupManagerRole travelPickupManagerRole,
+                               LocalDateTime createAt,
+                               LocalDateTime modifyAt) {
         this.nickName = nickName;
         this.provider = provider;
         this.providerId = providerId;
-        this.travelPickupUserRole = travelPickupUserRole;
+        this.centerId = centerId;
+        this.travelPickupManagerRole = travelPickupManagerRole;
+        this.createAt = createAt;
+        this.modifyAt = modifyAt;
     }
 
-    public static TravelPickupUser createKakaoUser(KakaoUserMeResponseDto kakaoUserMeResponseDto) {
-        return TravelPickupUser
+    public static TravelPickupManager createAdminKakaoUser(KakaoUserMeResponseDto kakaoUserMeResponseDto) {
+        return TravelPickupManager
                 .builder()
                 .provider(LoginProvider.kakao)
                 .providerId(kakaoUserMeResponseDto.getId())
                 .nickName(kakaoUserMeResponseDto.getProperties().getNickname())
-                .travelPickupUserRole(TravelPickupUserRole.USER)
+                .travelPickupManagerRole(TravelPickupManagerRole.PENDING_APPROVAL)
                 .build();
     }
 
-
+    public void assignPickupCenter(Long centerId) {
+        this.centerId = centerId;
+    }
 
 }

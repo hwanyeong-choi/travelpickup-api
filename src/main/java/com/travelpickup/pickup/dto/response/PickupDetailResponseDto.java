@@ -10,33 +10,33 @@ public class PickupDetailResponseDto {
 
     private PickupResponseDto pickup;
 
-    private PickupLocationResponseDto pickupLocation;
-
-    private PickupLocationResponseDto destinationLocation;
+    private DestinationLocationResponseDto destinationLocation;
 
     private List<PickupProductResponseDto> productResponseList;
 
+    private String qrUrl;
+
     @Builder
     public PickupDetailResponseDto(PickupResponseDto pickup,
-                                   PickupLocationResponseDto pickupLocation,
-                                   PickupLocationResponseDto destinationLocation,
-                                   List<PickupProductResponseDto> productResponseList) {
+                                   DestinationLocationResponseDto destinationLocation,
+                                   List<PickupProductResponseDto> productResponseList,
+                                   String qrUrl) {
         this.pickup = pickup;
-        this.pickupLocation = pickupLocation;
         this.destinationLocation = destinationLocation;
         this.productResponseList = productResponseList;
+        this.qrUrl = qrUrl;
     }
 
     public static PickupDetailResponseDto of(PickupResponseDto pickup,
-                                       PickupLocationResponseDto pickupLocation,
-                                       PickupLocationResponseDto descriptionLocation,
-                                       List<PickupProductResponseDto> productResponseList) {
+                                             DestinationLocationResponseDto descriptionLocation,
+                                             List<PickupProductResponseDto> productResponseList,
+                                             String qrUrl) {
         return PickupDetailResponseDto
                 .builder()
                 .pickup(pickup)
-                .pickupLocation(pickupLocation)
                 .destinationLocation(descriptionLocation)
                 .productResponseList(productResponseList)
+                .qrUrl(qrUrl)
                 .build();
     }
 

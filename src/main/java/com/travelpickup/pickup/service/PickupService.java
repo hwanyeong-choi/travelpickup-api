@@ -26,8 +26,6 @@ public class PickupService {
 
     private final DestinationLocationRepository destinationLocationRepository;
 
-    private final PickupLocationRepository pickupLocationRepository;
-
     private final PickupProductRepository pickupProductRepository;
 
     private final PickupProductImgRepository pickupProductImgRepository;
@@ -37,14 +35,13 @@ public class PickupService {
     public PickupService(PickupSearchService pickupSearchService,
                          PickupRepository pickupRepository,
                          DestinationLocationRepository destinationLocationRepository,
-                         PickupLocationRepository pickupLocationRepository,
+                         PickupCenterRepository pickupCenterRepository,
                          PickupProductRepository pickupProductRepository,
                          PickupProductImgRepository pickupProductImgRepository,
                          AmazonS3Service amazonS3Service) {
         this.pickupSearchService = pickupSearchService;
         this.pickupRepository = pickupRepository;
         this.destinationLocationRepository = destinationLocationRepository;
-        this.pickupLocationRepository = pickupLocationRepository;
         this.pickupProductRepository = pickupProductRepository;
         this.pickupProductImgRepository = pickupProductImgRepository;
         this.amazonS3Service = amazonS3Service;
@@ -61,17 +58,15 @@ public class PickupService {
             throw new TravelPickupServiceException(PickpServiceErrorType.PICKUP_ALREADY_IN_PROGRESS);
         }
 
-        Pickup pickup = Pickup.of(pickUpRegisterRequestDto, userId);
+        Pickup pickup = Pickup.of(userId);
         Pickup savePickup = pickupRepository.save(pickup);
 
-        PickupLocation pickupLocation = PickupLocation.of(pickUpRegisterRequestDto.getPickupLocation(), savePickup.getPickupId());
         DestinationLocation destinationLocation = DestinationLocation.of(pickUpRegisterRequestDto.getDescriptionLocation(), savePickup.getPickupId());
         List<PickupProduct> pickupProductList = pickUpRegisterRequestDto.getPickupProductDtoList()
                 .stream()
                 .map(it -> PickupProduct.of(it, savePickup.getPickupId()))
                 .toList();
 
-        pickupLocationRepository.save(pickupLocation);
         destinationLocationRepository.save(destinationLocation);
         pickupProductRepository.saveAll(pickupProductList);
 

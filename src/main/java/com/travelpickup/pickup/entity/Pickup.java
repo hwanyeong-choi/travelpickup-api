@@ -2,7 +2,6 @@ package com.travelpickup.pickup.entity;
 
 import com.travelpickup.common.util.DateConvertUtils;
 import com.travelpickup.pickup.enums.PickupState;
-import com.travelpickup.pickup.dto.request.PickUpRegisterRequestDto;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,6 +10,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+
+import static com.travelpickup.pickup.enums.PickupState.PICKUP_REQUEST_COMPLETED;
 
 @Getter
 @Entity
@@ -30,6 +31,9 @@ public class Pickup {
     @Enumerated(EnumType.STRING)
     private PickupState state;
 
+    @Column(name = "center_id")
+    private Long centerId;
+
     @Column(name = "create_at")
     @CreationTimestamp
     private LocalDateTime createAt;
@@ -45,11 +49,11 @@ public class Pickup {
         this.state = state;
     }
 
-    public static Pickup of(PickUpRegisterRequestDto pickUpRegisterRequestDto, Long userId) {
+    public static Pickup of(Long userId) {
         return Pickup
                 .builder()
                 .userId(userId)
-                .state(PickupState.PICKUP_MAN_MATCHING)
+                .state(PICKUP_REQUEST_COMPLETED)
                 .build();
     }
 
@@ -57,12 +61,22 @@ public class Pickup {
         this.state = pickupState;
     }
 
+    public void updatePickupCenterId(Long centerId) {
+        this.centerId = centerId;
+        this.state = PickupState.PICKUP_CENTER_REQUEST_COMPLETED;
+    }
+
     public String getMyPickupFormatCreateAt() {
         return DateConvertUtils.localDateConvert(this.createAt, DateConvertUtils.YYYY_DOT_MM_DOT_DD_PATTERN);
     }
 
     public boolean notCancelAble() {
-        return !PickupState.PICKUP_MAN_MATCHING.equals(this.state);
+        return !PICKUP_REQUEST_COMPLETED.equals(this.state);
     }
+
+    public boolean notPickupCenterRequestPossible() {
+        return !PICKUP_REQUEST_COMPLETED.equals(this.state);
+    }
+
 
 }

@@ -1,5 +1,6 @@
 package com.travelpickup.member.filter;
 
+import com.travelpickup.member.dto.LoginManager;
 import com.travelpickup.member.dto.LoginUser;
 import com.travelpickup.member.util.JWTUtil;
 import jakarta.servlet.FilterChain;
@@ -11,6 +12,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -30,8 +33,6 @@ public class JWTFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        log.info("[{}] 요청 URI:[{}]", request.getMethod(), request.getRequestURI());
-
         String authorization = request.getHeader(HttpHeaders.AUTHORIZATION);
 
         if (authorization == null || !authorization.startsWith(BEARER)) {
@@ -46,13 +47,24 @@ public class JWTFilter extends OncePerRequestFilter {
             return;
         }
 
-        Long userId = jwtUtil.getUserId(token);
-        String role = jwtUtil.getRole(token);
-
-        LoginUser loginUser = LoginUser.of(userId, role);
-        Authentication authToken = new UsernamePasswordAuthenticationToken(loginUser, null, loginUser.getAuthorities());
+        Authentication authToken = getAuthToken(token);
         SecurityContextHolder.getContext().setAuthentication(authToken);
         filterChain.doFilter(request, response);
+
+    }
+
+    private Authentication getAuthToken(String token) {
+        Long userId = jwtUtil.getUserId(token);
+        String role = jwtUtil.getRole(token);
+        Long centerId = jwtUtil.getCenterId(token);
+
+        if (ObjectUtils.isEmpty(centerId)) {
+            LoginUser loginUser = LoginUser.of(userId, role);
+            return new UsernamePasswordAuthenticationToken(loginUser, null, loginUser.getAuthorities());
+        }
+
+        LoginManager loginManager = LoginManager.of( userId, role, centerId);
+        return new UsernamePasswordAuthenticationToken(loginManager, null, loginManager.getAuthorities());
 
     }
 

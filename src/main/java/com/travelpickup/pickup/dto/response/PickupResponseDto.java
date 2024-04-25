@@ -10,15 +10,19 @@ public class PickupResponseDto {
 
     private Long id;
 
+    private Long centerId;
+
     private PickupState state;
 
     private String createAt;
 
     @Builder
     public PickupResponseDto(Long pickupId,
+                             Long centerId,
                              PickupState state,
                              String createAt) {
         this.id = pickupId;
+        this.centerId = centerId;
         this.state = state;
         this.createAt = createAt;
     }
@@ -27,6 +31,7 @@ public class PickupResponseDto {
         return PickupResponseDto
                 .builder()
                 .pickupId(pickup.getPickupId())
+                .centerId(pickup.getCenterId())
                 .state(pickup.getState())
                 .createAt(pickup.getMyPickupFormatCreateAt())
                 .build();

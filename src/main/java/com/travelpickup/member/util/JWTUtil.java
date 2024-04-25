@@ -31,6 +31,10 @@ public class JWTUtil {
         return jwtParser.parseSignedClaims(token).getPayload().get("role", String.class);
     }
 
+    public Long getCenterId(String token) {
+        return jwtParser.parseSignedClaims(token).getPayload().get("centerId", Long.class);
+    }
+
     public Boolean isExpired(String token) {
         return jwtParser.parseSignedClaims(token).getPayload().getExpiration().before(new Date());
     }
@@ -39,6 +43,18 @@ public class JWTUtil {
         return Jwts
                 .builder()
                 .claim("userId", userId)
+                .claim("role", role)
+                .issuedAt(new Date(System.currentTimeMillis()))
+                .expiration(new Date(System.currentTimeMillis() + expiredMs))
+                .signWith(secretKey)
+                .compact();
+    }
+
+    public String createJwt(Long userId, Long centerId, String role, Long expiredMs) {
+        return Jwts
+                .builder()
+                .claim("userId", userId)
+                .claim("centerId", centerId)
                 .claim("role", role)
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + expiredMs))

@@ -54,4 +54,8 @@ public class DestinationLocation {
                 .build();
     }
 
+    public static DestinationLocation createEmpty() {
+        return DestinationLocation.builder().build();
+    }
+
 }
