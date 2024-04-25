@@ -11,6 +11,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
+import static com.travelpickup.pickup.enums.PickupState.PICKUP_REQUEST_COMPLETED;
+
 @Getter
 @Entity
 @NoArgsConstructor
@@ -51,7 +53,7 @@ public class Pickup {
         return Pickup
                 .builder()
                 .userId(userId)
-                .state(PickupState.PICKUP_MAN_MATCHING)
+                .state(PICKUP_REQUEST_COMPLETED)
                 .build();
     }
 
@@ -61,6 +63,7 @@ public class Pickup {
 
     public void updatePickupCenterId(Long centerId) {
         this.centerId = centerId;
+        this.state = PickupState.PICKUP_CENTER_REQUEST_COMPLETED;
     }
 
     public String getMyPickupFormatCreateAt() {
@@ -68,7 +71,12 @@ public class Pickup {
     }
 
     public boolean notCancelAble() {
-        return !PickupState.PICKUP_MAN_MATCHING.equals(this.state);
+        return !PICKUP_REQUEST_COMPLETED.equals(this.state);
     }
+
+    public boolean notPickupCenterRequestPossible() {
+        return !PICKUP_REQUEST_COMPLETED.equals(this.state);
+    }
+
 
 }

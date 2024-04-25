@@ -1,15 +1,21 @@
 package com.travelpickup.member.domain;
 
+import com.travelpickup.member.dto.KakaoUserMeResponseDto;
 import com.travelpickup.member.enums.LoginProvider;
 import com.travelpickup.member.enums.TravelPickupManagerRole;
 import com.travelpickup.member.enums.TravelPickupUserRole;
 import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
+@Getter
 @Entity
+@NoArgsConstructor
 @Table(name = "travelpickup_manager")
 public class TravelPickupManager {
 
@@ -28,6 +34,9 @@ public class TravelPickupManager {
     @Column(name = "provider_id", unique = true, nullable = false)
     private Long providerId;
 
+    @Column(name = "center_id", nullable = true)
+    private Long centerId;
+
     @Column(name = "role", columnDefinition = "VARCHAR(100)", nullable = false)
     @Enumerated(value = EnumType.STRING)
     private TravelPickupManagerRole travelPickupManagerRole;
@@ -39,5 +48,36 @@ public class TravelPickupManager {
     @UpdateTimestamp
     @Column(name = "modify_at", nullable = false)
     private LocalDateTime modifyAt;
+
+    @Builder
+    public TravelPickupManager(String nickName,
+                               LoginProvider provider,
+                               Long providerId,
+                               Long centerId,
+                               TravelPickupManagerRole travelPickupManagerRole,
+                               LocalDateTime createAt,
+                               LocalDateTime modifyAt) {
+        this.nickName = nickName;
+        this.provider = provider;
+        this.providerId = providerId;
+        this.centerId = centerId;
+        this.travelPickupManagerRole = travelPickupManagerRole;
+        this.createAt = createAt;
+        this.modifyAt = modifyAt;
+    }
+
+    public static TravelPickupManager createAdminKakaoUser(KakaoUserMeResponseDto kakaoUserMeResponseDto) {
+        return TravelPickupManager
+                .builder()
+                .provider(LoginProvider.kakao)
+                .providerId(kakaoUserMeResponseDto.getId())
+                .nickName(kakaoUserMeResponseDto.getProperties().getNickname())
+                .travelPickupManagerRole(TravelPickupManagerRole.PENDING_APPROVAL)
+                .build();
+    }
+
+    public void assignPickupCenter(Long centerId) {
+        this.centerId = centerId;
+    }
 
 }

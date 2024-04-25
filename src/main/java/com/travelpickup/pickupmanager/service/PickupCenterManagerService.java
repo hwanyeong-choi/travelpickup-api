@@ -6,6 +6,8 @@ import com.travelpickup.pickupmanager.dto.PickupCenterRegisterRequestDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional(readOnly = true)
 public class PickupCenterManagerService {
@@ -18,10 +20,8 @@ public class PickupCenterManagerService {
 
     @Transactional(readOnly = false)
     public void registerPickupCenter(PickupCenterRegisterRequestDto pickupCenterRegisterRequestDto) {
-
         PickupCenter pickupCenter = PickupCenter.of(pickupCenterRegisterRequestDto);
         pickupCenterRepository.save(pickupCenter);
-
     }
 
 }

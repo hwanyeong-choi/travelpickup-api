@@ -10,33 +10,33 @@ public class PickupDetailResponseDto {
 
     private PickupResponseDto pickup;
 
-    private PickupCenterResponseDto pickupCenterResponseDto;
-
     private DestinationLocationResponseDto destinationLocation;
 
     private List<PickupProductResponseDto> productResponseList;
 
+    private String qrUrl;
+
     @Builder
     public PickupDetailResponseDto(PickupResponseDto pickup,
-                                   PickupCenterResponseDto pickupCenterResponseDto,
                                    DestinationLocationResponseDto destinationLocation,
-                                   List<PickupProductResponseDto> productResponseList) {
+                                   List<PickupProductResponseDto> productResponseList,
+                                   String qrUrl) {
         this.pickup = pickup;
-        this.pickupCenterResponseDto = pickupCenterResponseDto;
         this.destinationLocation = destinationLocation;
         this.productResponseList = productResponseList;
+        this.qrUrl = qrUrl;
     }
 
     public static PickupDetailResponseDto of(PickupResponseDto pickup,
-                                       PickupCenterResponseDto pickupLocation,
-                                       DestinationLocationResponseDto descriptionLocation,
-                                       List<PickupProductResponseDto> productResponseList) {
+                                             DestinationLocationResponseDto descriptionLocation,
+                                             List<PickupProductResponseDto> productResponseList,
+                                             String qrUrl) {
         return PickupDetailResponseDto
                 .builder()
                 .pickup(pickup)
-                .pickupCenterResponseDto(pickupLocation)
                 .destinationLocation(descriptionLocation)
                 .productResponseList(productResponseList)
+                .qrUrl(qrUrl)
                 .build();
     }
 

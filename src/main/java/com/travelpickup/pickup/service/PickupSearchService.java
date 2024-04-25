@@ -36,6 +36,8 @@ public class PickupSearchService {
 
     private final String FINISH_PICKUP_KEY = "FINISH_PICKUP_KEY";
 
+    private final String QR_PICKUP_URL_PREFIX = "http://localhost:8080/api/v1/pickup/manager";
+
 
     public PickupSearchService(PickupRepository pickupRepository,
                                PickupCenterRepository pickupCenterRepository,
@@ -81,15 +83,9 @@ public class PickupSearchService {
 
         PickupResponseDto pickup = PickupResponseDto.of(optionalPickup.get());
 
-        PickupCenter pickupCenter = pickupCenterRepository
-                .findById(pickup.getCenterId())
-                .orElse(PickupCenter.createEmpty());
-
         DestinationLocation destinationLocation = destinationLocationRepository
                 .findByPickupId(pickupId)
                 .orElse(DestinationLocation.createEmpty());
-
-        PickupCenterResponseDto pickupCenterResponseDto = PickupCenterResponseDto.of(pickupCenter);
 
         DestinationLocationResponseDto destinationLocationResponseDto = DestinationLocationResponseDto.of(destinationLocation);
 
@@ -100,9 +96,9 @@ public class PickupSearchService {
 
         return PickupDetailResponseDto.of(
                 pickup,
-                pickupCenterResponseDto,
                 destinationLocationResponseDto,
-                pickupProductResponseDtoList
+                pickupProductResponseDtoList,
+                QR_PICKUP_URL_PREFIX + pickup.getId()
         );
 
     }

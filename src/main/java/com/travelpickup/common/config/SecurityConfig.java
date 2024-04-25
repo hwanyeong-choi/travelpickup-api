@@ -1,5 +1,6 @@
 package com.travelpickup.common.config;
 
+import com.travelpickup.common.filter.RequestInforFilter;
 import com.travelpickup.member.filter.JWTFilter;
 import com.travelpickup.member.util.JWTUtil;
 import org.springframework.context.annotation.Bean;
@@ -69,6 +70,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated());
 
         http
+                .addFilterAt(new RequestInforFilter(), UsernamePasswordAuthenticationFilter.class)
                 .addFilterAt(new JWTFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
