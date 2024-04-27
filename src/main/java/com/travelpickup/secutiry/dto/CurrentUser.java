@@ -1,4 +1,4 @@
-package com.travelpickup.member.dto;
+package com.travelpickup.secutiry.dto;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
@@ -8,4 +8,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @AuthenticationPrincipal
-public @interface CurrentUser { }
+public @interface CurrentUser {
+
+    boolean isRequired() default true;
+}

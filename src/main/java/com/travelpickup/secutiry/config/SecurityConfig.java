@@ -1,8 +1,12 @@
-package com.travelpickup.common.config;
+package com.travelpickup.secutiry.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.travelpickup.common.filter.RequestInforFilter;
-import com.travelpickup.member.filter.JWTFilter;
+import com.travelpickup.member.enums.TravelPickupManagerRole;
+import com.travelpickup.secutiry.filter.JWTFilter;
 import com.travelpickup.member.util.JWTUtil;
+import com.travelpickup.secutiry.handler.JwtAuthenticationEntryPoint;
+import com.travelpickup.secutiry.handler.TravelPickupAccessDeniedHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
@@ -13,6 +17,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 
@@ -24,10 +29,15 @@ public class SecurityConfig {
 
     private final AuthenticationConfiguration authenticationConfiguration;
 
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+
     private final JWTUtil jwtUtil;
 
-    public SecurityConfig(AuthenticationConfiguration authenticationConfiguration, JWTUtil jwtUtil) {
+    public SecurityConfig(AuthenticationConfiguration authenticationConfiguration,
+                          JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
+                          JWTUtil jwtUtil) {
         this.authenticationConfiguration = authenticationConfiguration;
+        this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
         this.jwtUtil = jwtUtil;
     }
 
@@ -37,6 +47,11 @@ public class SecurityConfig {
     @Bean
     AuthenticationManager authenticationManager (AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
+    }
+
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+        return new TravelPickupAccessDeniedHandler(new ObjectMapper());
     }
 
     @Bean
@@ -62,10 +77,14 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
+                .exceptionHandling(exceptions -> {
+                    exceptions.accessDeniedHandler(accessDeniedHandler());
+                    exceptions.authenticationEntryPoint(jwtAuthenticationEntryPoint);})
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/v1/auth/**").permitAll()
                         .requestMatchers("/api/v1/login/**").permitAll()
                         .requestMatchers("/api/v1/health/**").permitAll()
+                        .requestMatchers("/api/v1/manager/**").hasAnyRole("ADMIN", "MANAGER")
                         .requestMatchers("/error").permitAll()
                         .anyRequest().authenticated());
 

@@ -1,8 +1,11 @@
-package com.travelpickup.member.dto;
+package com.travelpickup.secutiry.dto;
 
+import com.travelpickup.member.domain.TravelPickupManager;
+import com.travelpickup.member.enums.TravelPickupManagerRole;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
@@ -18,10 +21,18 @@ public class LoginManager implements UserDetails {
 
     private Long centerId;
 
+    public boolean isManager() {
+        return this.role.equals(TravelPickupManagerRole.MANAGER.name());
+    }
+
+    public boolean isAdmin() {
+        return this.role.equals(TravelPickupManagerRole.ADMIN.name());
+    }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return new ArrayList<>(List.of((GrantedAuthority) this::getRole));
+        return List.of(new SimpleGrantedAuthority("ROLE_" + role));
     }
 
     @Override
@@ -41,7 +52,7 @@ public class LoginManager implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override

@@ -1,14 +1,13 @@
 package com.travelpickup.pickupmanager.service;
 
 import com.travelpickup.common.exception.TravelPickupServiceException;
-import com.travelpickup.member.dto.LoginManager;
-import com.travelpickup.member.dto.LoginUser;
+import com.travelpickup.secutiry.dto.LoginManager;
 import com.travelpickup.member.repository.TravelPickupUserRepository;
 import com.travelpickup.pickup.entity.Pickup;
-import com.travelpickup.pickup.entity.PickupCenter;
 import com.travelpickup.pickup.repository.PickupCenterRepository;
 import com.travelpickup.pickup.repository.PickupRepository;
 import com.travelpickup.pickupmanager.error.PickupManagerErrorType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

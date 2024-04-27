@@ -1,7 +1,7 @@
 package com.travelpickup.member.controller;
 
-import com.travelpickup.member.dto.CurrentUser;
-import com.travelpickup.member.dto.LoginUser;
+import com.travelpickup.secutiry.dto.CurrentUser;
+import com.travelpickup.secutiry.dto.LoginUser;
 import com.travelpickup.member.service.TravelPickupUserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
