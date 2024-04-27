@@ -8,7 +8,4 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @AuthenticationPrincipal
-public @interface CurrentUser {
-
-    boolean isRequired() default true;
-}
+public @interface CurrentUser { }
