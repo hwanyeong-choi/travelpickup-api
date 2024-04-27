@@ -17,7 +17,7 @@ public enum PickupManagerErrorType implements TravelPickupErrorType {
 
     @Override
     public String getMessage() {
-        return "";
+        return this.message;
     }
 
 }

@@ -1,8 +1,10 @@
-package com.travelpickup.member.filter;
+package com.travelpickup.secutiry.filter;
 
-import com.travelpickup.member.dto.LoginManager;
-import com.travelpickup.member.dto.LoginUser;
+import com.travelpickup.secutiry.dto.LoginManager;
+import com.travelpickup.secutiry.dto.LoginUser;
 import com.travelpickup.member.util.JWTUtil;
+import com.travelpickup.secutiry.enums.JWTErrorType;
+import io.jsonwebtoken.MalformedJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,7 +14,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -25,13 +26,19 @@ public class JWTFilter extends OncePerRequestFilter {
 
     private final String BEARER = "Bearer ";
 
+    private final String TOKEN_SPLIT = " ";
+
+    private final int TOKEN_INDEX = 1;
+
     public JWTFilter(JWTUtil jwtUtil) {
         this.jwtUtil = jwtUtil;
     }
 
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request,
+                                    HttpServletResponse response,
+                                    FilterChain filterChain) throws ServletException, IOException {
 
         String authorization = request.getHeader(HttpHeaders.AUTHORIZATION);
 
@@ -40,16 +47,23 @@ public class JWTFilter extends OncePerRequestFilter {
             return;
         }
 
-        String token = authorization.split(" ")[1];
+        String token = authorization.split(TOKEN_SPLIT)[TOKEN_INDEX];
 
-        if (jwtUtil.isExpired(token)) {
+        try {
+
+            if (jwtUtil.isExpired(token)) {
+                filterChain.doFilter(request, response);
+                return;
+            }
+
+            Authentication authToken = getAuthToken(token);
+            SecurityContextHolder.getContext().setAuthentication(authToken);
             filterChain.doFilter(request, response);
-            return;
-        }
 
-        Authentication authToken = getAuthToken(token);
-        SecurityContextHolder.getContext().setAuthentication(authToken);
-        filterChain.doFilter(request, response);
+        } catch (MalformedJwtException exception) {
+            request.setAttribute("exception", JWTErrorType.JWT_TOKEN_IS_INVALID);
+            filterChain.doFilter(request, response);
+        }
 
     }
 

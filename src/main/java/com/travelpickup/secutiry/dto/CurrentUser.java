@@ -1,4 +1,4 @@
-package com.travelpickup.member.dto;
+package com.travelpickup.secutiry.dto;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 

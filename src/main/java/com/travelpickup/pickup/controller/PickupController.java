@@ -1,7 +1,7 @@
 package com.travelpickup.pickup.controller;
 
-import com.travelpickup.member.dto.CurrentUser;
-import com.travelpickup.member.dto.LoginUser;
+import com.travelpickup.secutiry.dto.CurrentUser;
+import com.travelpickup.secutiry.dto.LoginUser;
 import com.travelpickup.pickup.dto.response.MyPickupResponseDto;
 import com.travelpickup.pickup.dto.request.PickUpRegisterRequestDto;
 import com.travelpickup.pickup.dto.response.PickupDetailResponseDto;
