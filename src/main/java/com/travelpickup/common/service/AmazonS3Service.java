@@ -1,6 +1,7 @@
 package com.travelpickup.common.service;
 
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,25 +33,19 @@ public class AmazonS3Service {
         List<String> pickupImagePathList = new ArrayList<>();
 
         for (MultipartFile multipartFile : multipartFileList) {
-            File file = convertMultiPartToFile(multipartFile);
-            pickupImagePathList.add(uploadFileToS3(file, PICKUP_IMG_FILE_PREFIX + pickupId));
+            pickupImagePathList.add(uploadFileToS3(multipartFile, PICKUP_IMG_FILE_PREFIX + pickupId));
         }
 
         return pickupImagePathList;
 
     }
 
-    private File convertMultiPartToFile(MultipartFile file) throws IOException {
-        File convFile = new File(file.getOriginalFilename());
-        FileOutputStream fos = new FileOutputStream(convFile);
-        fos.write(file.getBytes());
-        fos.close();
-        return convFile;
-    }
-
-    private String uploadFileToS3(File file, String fileName) {
+    private String uploadFileToS3(MultipartFile multipartFile, String fileName) throws IOException {
         String uniqueFileName = UUID.randomUUID().toString() + "_" + fileName;
-        amazonS3.putObject(new PutObjectRequest(PICKUP_IMAGE_BUCKET, uniqueFileName, file));
+        ObjectMetadata metadata = new ObjectMetadata();
+        metadata.setContentLength(multipartFile.getSize());
+        metadata.setContentType(multipartFile.getContentType());
+        amazonS3.putObject(PICKUP_IMAGE_BUCKET, uniqueFileName, multipartFile.getInputStream(), metadata);
         return amazonS3.getUrl(PICKUP_IMAGE_BUCKET, uniqueFileName).toString();
     }
 

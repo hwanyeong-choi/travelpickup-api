@@ -22,6 +22,15 @@ public enum PickupState {
         this.description = description;
     }
 
+    public static List<PickupState> getAlreadyProgressStateList() {
+        return Arrays.asList(
+                PICKUP_REQUEST_COMPLETED,
+                PICKUP_CENTER_REQUEST_COMPLETED,
+                PICKUP_DELIVERY_AWAITING,
+                PICKUP_DELIVERY_IN_PROGRESS,
+                PICKUP_DELIVERY_COMPLETED);
+    }
+
     public static List<PickupState> getInProgressStateList() {
         return Arrays.asList(
                 PICKUP_CENTER_REQUEST_COMPLETED,

@@ -52,9 +52,9 @@ public class PickupService {
                            List<MultipartFile> pickupProductsPhotoFiles,
                            Long userId) throws IOException {
 
-        boolean isInProgress = pickupSearchService.isInProgress(userId);
+        boolean isAlreadyProgress = pickupSearchService.isAlreadyProgress(userId);
 
-        if (isInProgress) {
+        if (isAlreadyProgress) {
             throw new TravelPickupServiceException(PickpServiceErrorType.PICKUP_ALREADY_IN_PROGRESS);
         }
 

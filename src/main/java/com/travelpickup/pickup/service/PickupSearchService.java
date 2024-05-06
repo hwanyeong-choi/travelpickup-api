@@ -4,7 +4,6 @@ import com.travelpickup.common.exception.TravelPickupServiceException;
 import com.travelpickup.pickup.dto.response.*;
 import com.travelpickup.pickup.entity.DestinationLocation;
 import com.travelpickup.pickup.entity.Pickup;
-import com.travelpickup.pickup.entity.PickupCenter;
 import com.travelpickup.pickup.enums.PickupState;
 import com.travelpickup.pickup.error.PickpServiceErrorType;
 import com.travelpickup.pickup.repository.DestinationLocationRepository;
@@ -50,8 +49,8 @@ public class PickupSearchService {
     }
 
     @Transactional(readOnly = true)
-    public boolean isInProgress(Long userId) {
-        return pickupRepository.existsByUserIdAndStateIn(userId, PickupState.getInProgressStateList());
+    public boolean isAlreadyProgress(Long userId) {
+        return pickupRepository.existsByUserIdAndStateIn(userId, PickupState.getAlreadyProgressStateList());
     }
 
     @Transactional(readOnly = true)
