@@ -7,16 +7,20 @@ import lombok.Setter;
 @Setter
 public class PickupLocationDto {
 
-    private String description;
+    private String address;
+
+    private String addressDetail;
 
     private Double latitude;
 
     private Double longitude;
 
-    public PickupLocationDto(String description,
+    public PickupLocationDto(String address,
+                             String addressDetail,
                              Double latitude,
                              Double longitude) {
-        this.description = description;
+        this.address = address;
+        this.addressDetail = addressDetail;
         this.latitude = latitude;
         this.longitude = longitude;
     }

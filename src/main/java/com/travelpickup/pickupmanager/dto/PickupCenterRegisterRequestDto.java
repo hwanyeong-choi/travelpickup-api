@@ -9,7 +9,9 @@ public class PickupCenterRegisterRequestDto {
 
     private String name;
 
-    private String description;
+    private String address;
+
+    private String addressDetail;
 
     private Double latitude;
 

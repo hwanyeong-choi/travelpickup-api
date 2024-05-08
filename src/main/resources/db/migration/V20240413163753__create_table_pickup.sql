@@ -15,7 +15,8 @@ DROP TABLE IF EXISTS pickup_center;
 CREATE TABLE pickup_center(
     pickup_center_id BIGINT AUTO_INCREMENT COMMENT '픽업 스토어 아이디',
     name VARCHAR(255) NOT NULL COMMENT '픽업 스토어 명',
-    description TEXT COMMENT '픽업 스토어 상세내역',
+    address VARCHAR(255) COMMENT '픽업 센터 주소',
+    address_detail VARCHAR(255) COMMENT  '픽업센터 상세 주소',
     latitude DOUBLE NOT NULL COMMENT '픽업 스토어 위치 위도',
     longitude DOUBLE NOT NULL COMMENT '픽업 스토어 위치 경도',
     PRIMARY KEY (pickup_center_id)
@@ -25,7 +26,8 @@ DROP TABLE IF EXISTS destination_location;
 CREATE TABLE destination_location(
     destination_location_id BIGINT AUTO_INCREMENT COMMENT '숙소위치 아이디',
     pickup_id BIGINT NOT NULL COMMENT '픽업 아이디',
-    description TEXT COMMENT '픽업 위치 상세내역',
+    address VARCHAR(255) COMMENT '숙소 주소',
+    address_detail VARCHAR(255) COMMENT '숙소 상세 주소',
     latitude DOUBLE NOT NULL COMMENT '픽업위치 위도',
     longitude DOUBLE NOT NULL COMMENT '픽업위치 경도',
     INDEX IDX_PICKUP_ID (pickup_id),
@@ -45,8 +47,8 @@ CREATE TABLE pickup_product (
 DROP TABLE IF EXISTS pickup_product_img;
 CREATE TABLE pickup_product_img (
     pickup_product_img_id BIGINT AUTO_INCREMENT COMMENT '픽업 물건 사진 아이디',
-    pickup_id BIGINT NOT NULL COMMENT '픽업 아이디',
+    pickup_product_id BIGINT NOT NULL COMMENT '픽업 물품 아이디',
     path VARCHAR(255) NOT NULL COMMENT '물품 사진 경로',
-    INDEX IDX_PICKUP_ID (pickup_id),
+    INDEX IDX_PICKUP_ID (pickup_product_id),
     PRIMARY KEY (pickup_product_img_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

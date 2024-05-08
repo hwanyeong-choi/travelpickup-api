@@ -22,8 +22,11 @@ public class DestinationLocation {
     @Column(name = "pickup_id")
     private Long pickupId;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = " address_detail")
+    private String addressDetail;
 
     @Column(name = "latitude", columnDefinition = "DECIMAL(10, 8")
     private Double latitude;
@@ -34,11 +37,13 @@ public class DestinationLocation {
 
     @Builder
     public DestinationLocation(Long pickupId,
-                               String description,
+                               String address,
+                               String addressDetail,
                                Double latitude,
                                Double longitude) {
         this.pickupId = pickupId;
-        this.description = description;
+        this.address = address;
+        this.addressDetail = addressDetail;
         this.latitude = latitude;
         this.longitude = longitude;
     }
@@ -48,7 +53,8 @@ public class DestinationLocation {
         return DestinationLocation
                 .builder()
                 .pickupId(pickupId)
-                .description(pickupLocationDto.getDescription())
+                .address(pickupLocationDto.getAddress())
+                .addressDetail(pickupLocationDto.getAddressDetail())
                 .latitude(pickupLocationDto.getLatitude())
                 .longitude(pickupLocationDto.getLongitude())
                 .build();

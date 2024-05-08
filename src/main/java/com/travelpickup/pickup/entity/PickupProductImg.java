@@ -16,27 +16,28 @@ public class PickupProductImg {
     @Column(name = "pickup_product_img_id")
     private Long pickupProductImgId;
 
-    @Column(name = "pickup_id")
-    private Long pickupId;
+    @Column(name = "pickup_product_id")
+    private Long pickupProductId;
 
     @Column(name = "path")
     private String path;
 
     @Builder
-    public PickupProductImg(Long pickupId,
+    public PickupProductImg(Long pickupProductId,
                             String path) {
-        this.pickupId = pickupId;
+        this.pickupProductId = pickupProductId;
         this.path = path;
     }
 
-    public static PickupProductImg of(Long pickupId, String path) {
+    public static PickupProductImg of(String path) {
         return PickupProductImg
                 .builder()
-                .pickupId(pickupId)
                 .path(path)
                 .build();
     }
 
-
+    public void updatePickupProductId(Long pickupProductId) {
+        this.pickupProductId = pickupProductId;
+    }
 
 }

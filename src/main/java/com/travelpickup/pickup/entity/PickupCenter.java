@@ -20,8 +20,11 @@ public class PickupCenter {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "address_detail")
+    private String addressDetail;
 
     @Column(name = "latitude", columnDefinition = "DECIMAL(10, 8")
     private Double latitude;
@@ -31,11 +34,13 @@ public class PickupCenter {
 
     @Builder
     public PickupCenter(String name,
-                        String description,
+                        String address,
+                        String addressDetail,
                         Double latitude,
                         Double longitude) {
         this.name = name;
-        this.description = description;
+        this.address = address;
+        this.addressDetail = addressDetail;
         this.latitude = latitude;
         this.longitude = longitude;
     }
@@ -44,7 +49,8 @@ public class PickupCenter {
         return PickupCenter
                 .builder()
                 .name(pickupCenterRegisterRequestDto.getName())
-                .description(pickupCenterRegisterRequestDto.getDescription())
+                .address(pickupCenterRegisterRequestDto.getAddress())
+                .addressDetail(pickupCenterRegisterRequestDto.getAddressDetail())
                 .latitude(pickupCenterRegisterRequestDto.getLatitude())
                 .longitude(pickupCenterRegisterRequestDto.getLongitude())
                 .build();

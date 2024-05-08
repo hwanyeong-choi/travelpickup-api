@@ -30,8 +30,8 @@ public class PickupController {
 
     @PostMapping
     public ResponseEntity<String> registerPickup(@CurrentUser LoginUser loginUser,
-                                                 @RequestPart(required = true, name = "pickUpRegisterRequestDto") PickUpRegisterRequestDto pickUpRegisterRequestDto,
-                                                 @RequestPart(required = true, name = "pickupProductsPhotoFiles") List<MultipartFile> pickupProductsPhotoFiles) throws IOException {
+                                                 @RequestPart(required = true) PickUpRegisterRequestDto pickUpRegisterRequestDto,
+                                                 @RequestPart(required = true) List<MultipartFile> pickupProductsPhotoFiles) throws IOException {
         pickupService.pickupSave(pickUpRegisterRequestDto, pickupProductsPhotoFiles, loginUser.getId());
         return ResponseEntity
                 .status(HttpStatus.CREATED)

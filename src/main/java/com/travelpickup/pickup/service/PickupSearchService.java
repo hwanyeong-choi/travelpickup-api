@@ -1,18 +1,18 @@
 package com.travelpickup.pickup.service;
 
 import com.travelpickup.common.exception.TravelPickupServiceException;
+import com.travelpickup.common.service.AmazonS3Service;
 import com.travelpickup.pickup.dto.response.*;
 import com.travelpickup.pickup.entity.DestinationLocation;
 import com.travelpickup.pickup.entity.Pickup;
+import com.travelpickup.pickup.entity.PickupProductImg;
 import com.travelpickup.pickup.enums.PickupState;
 import com.travelpickup.pickup.error.PickpServiceErrorType;
-import com.travelpickup.pickup.repository.DestinationLocationRepository;
-import com.travelpickup.pickup.repository.PickupCenterRepository;
-import com.travelpickup.pickup.repository.PickupProductRepository;
-import com.travelpickup.pickup.repository.PickupRepository;
+import com.travelpickup.pickup.repository.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -36,16 +36,20 @@ public class PickupSearchService {
     private final String FINISH_PICKUP_KEY = "FINISH_PICKUP_KEY";
 
     private final String QR_PICKUP_URL_PREFIX = "http://localhost:8080/api/v1/pickup/manager";
+    private final PickupProductImgRepository pickupProductImgRepository;
+    private final AmazonS3Service amazonS3Service;
 
 
     public PickupSearchService(PickupRepository pickupRepository,
                                PickupCenterRepository pickupCenterRepository,
                                DestinationLocationRepository destinationLocationRepository,
-                               PickupProductRepository pickupProductRepository) {
+                               PickupProductRepository pickupProductRepository, PickupProductImgRepository pickupProductImgRepository, AmazonS3Service amazonS3Service) {
         this.pickupRepository = pickupRepository;
         this.pickupCenterRepository = pickupCenterRepository;
         this.destinationLocationRepository = destinationLocationRepository;
         this.pickupProductRepository = pickupProductRepository;
+        this.pickupProductImgRepository = pickupProductImgRepository;
+        this.amazonS3Service = amazonS3Service;
     }
 
     @Transactional(readOnly = true)
@@ -80,6 +84,10 @@ public class PickupSearchService {
             throw new TravelPickupServiceException(PickpServiceErrorType.INVALID_PICKUP_ID);
         }
 
+        if (!optionalPickup.get().getUserId().equals(userId)) {
+            throw new TravelPickupServiceException(PickpServiceErrorType.INVALID_PICKUP_ID);
+        }
+
         PickupResponseDto pickup = PickupResponseDto.of(optionalPickup.get());
 
         DestinationLocation destinationLocation = destinationLocationRepository
@@ -90,7 +98,22 @@ public class PickupSearchService {
 
         List<PickupProductResponseDto> pickupProductResponseDtoList = pickupProductRepository.findByPickupId(pickupId)
                 .stream()
-                .map(PickupProductResponseDto::of)
+                .map(pickupProduct -> {
+                    Optional<PickupProductImg> optionalPickupProductImg
+                            = pickupProductImgRepository.findByPickupProductId(pickupProduct.getPickupProductId());
+
+                    if (optionalPickup.isPresent()) {
+                        PickupProductImg pickupProductImg = optionalPickupProductImg.get();
+
+                        try {
+                            String pickupProductImgByBase64 = amazonS3Service.getPickupImageFile(pickupProductImg.getPath());
+                            return PickupProductResponseDto.of(pickupProduct, pickupProductImgByBase64);
+                        } catch (IOException e) {
+                            return PickupProductResponseDto.of(pickupProduct);
+                        }
+                    }
+                    return PickupProductResponseDto.of(pickupProduct);
+                })
                 .toList();
 
         return PickupDetailResponseDto.of(
@@ -108,6 +131,3 @@ public class PickupSearchService {
     }
 
 }
-
-
-

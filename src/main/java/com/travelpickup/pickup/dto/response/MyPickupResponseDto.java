@@ -8,13 +8,13 @@ import java.util.List;
 @Getter
 public class MyPickupResponseDto {
 
-    private List<PickupResponseDto> inProgressPickList;
+    private List<PickupResponseDto> inProgressPickupList;
     private List<PickupResponseDto> finishPickupList;
 
     @Builder
-    public MyPickupResponseDto(List<PickupResponseDto> inProgressPickList,
+    public MyPickupResponseDto(List<PickupResponseDto> inProgressPickupList,
                                List<PickupResponseDto> finishPickupList) {
-        this.inProgressPickList = inProgressPickList;
+        this.inProgressPickupList = inProgressPickupList;
         this.finishPickupList = finishPickupList;
     }
 
@@ -22,7 +22,7 @@ public class MyPickupResponseDto {
                                          List<PickupResponseDto> completedPickupList) {
         return MyPickupResponseDto
                 .builder()
-                .inProgressPickList(inProgressPickList)
+                .inProgressPickupList(inProgressPickList)
                 .finishPickupList(completedPickupList)
                 .build();
     }

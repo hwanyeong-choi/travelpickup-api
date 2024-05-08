@@ -35,7 +35,7 @@ public class PickupCenterResponseDto {
                 .builder()
                 .id(pickupCenter.getPickupCenterId())
                 .name(pickupCenter.getName())
-                .description(pickupCenter.getDescription())
+                .description(pickupCenter.getAddress())
                 .latitude(pickupCenter.getLatitude())
                 .longitude(pickupCenter.getLongitude())
                 .build();

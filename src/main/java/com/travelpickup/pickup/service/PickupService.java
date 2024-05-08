@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 @Service
 @Transactional(readOnly = true)
@@ -62,25 +63,27 @@ public class PickupService {
         Pickup savePickup = pickupRepository.save(pickup);
 
         DestinationLocation destinationLocation = DestinationLocation.of(pickUpRegisterRequestDto.getDescriptionLocation(), savePickup.getPickupId());
+
         List<PickupProduct> pickupProductList = pickUpRegisterRequestDto.getPickupProductDtoList()
                 .stream()
                 .map(it -> PickupProduct.of(it, savePickup.getPickupId()))
                 .toList();
 
         destinationLocationRepository.save(destinationLocation);
-        pickupProductRepository.saveAll(pickupProductList);
 
-        if (Boolean.FALSE.equals(CollectionUtils.isEmpty(pickupProductsPhotoFiles))) {
+        List<PickupProduct> savePickupProductList = pickupProductRepository.saveAll(pickupProductList);
 
-            List<PickupProductImg> pickupProductImgList = amazonS3Service
-                    .uploadPickupImageFile(pickupProductsPhotoFiles, pickup.getPickupId())
-                    .stream()
-                    .map(path -> PickupProductImg.of(savePickup.getPickupId(), path))
-                    .toList();
+        List<PickupProductImg> pickupProductImgList = amazonS3Service
+                .uploadPickupImageFile(pickupProductsPhotoFiles, pickup.getPickupId())
+                .stream()
+                .map(PickupProductImg::of)
+                .toList();
 
-            pickupProductImgRepository.saveAll(pickupProductImgList);
+        IntStream.range(0, savePickupProductList.size()).forEach(index -> {
+                    Long savePickupProductId = savePickupProductList.get(index).getPickupProductId();
+                    pickupProductImgList.get(index).updatePickupProductId(savePickupProductId);});
 
-        }
+        pickupProductImgRepository.saveAll(pickupProductImgList);
 
     }
 
