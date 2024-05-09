@@ -16,13 +16,13 @@ public class PickupProduct {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pickupProductId;
 
-    @Column(name = "pickup_id")
+    @Column(name = "pickup_id", nullable = false)
     private Long pickupId;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "quantity")
+    @Column(name = "quantity", nullable = false)
     private Long quantity;
 
     @Builder

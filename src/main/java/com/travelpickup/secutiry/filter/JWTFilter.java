@@ -2,7 +2,7 @@ package com.travelpickup.secutiry.filter;
 
 import com.travelpickup.secutiry.dto.LoginManager;
 import com.travelpickup.secutiry.dto.LoginUser;
-import com.travelpickup.member.util.JWTUtil;
+import com.travelpickup.secutiry.util.JWTUtil;
 import com.travelpickup.secutiry.enums.JWTErrorType;
 import io.jsonwebtoken.MalformedJwtException;
 import jakarta.servlet.FilterChain;

@@ -13,13 +13,13 @@ public class PickupProductImg {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "pickup_product_img_id")
+    @Column(name = "pickup_product_img_id", nullable = false)
     private Long pickupProductImgId;
 
-    @Column(name = "pickup_product_id")
+    @Column(name = "pickup_product_id", nullable = false)
     private Long pickupProductId;
 
-    @Column(name = "path")
+    @Column(name = "path", nullable = false)
     private String path;
 
     @Builder

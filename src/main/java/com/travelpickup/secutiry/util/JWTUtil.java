@@ -1,4 +1,4 @@
-package com.travelpickup.member.util;
+package com.travelpickup.secutiry.util;
 
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;

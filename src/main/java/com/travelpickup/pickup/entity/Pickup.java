@@ -24,21 +24,21 @@ public class Pickup {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pickupId;
 
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false)
     private Long userId;
 
-    @Column(name = "state", columnDefinition = "VARCHAR(100)")
+    @Column(name = "state", columnDefinition = "VARCHAR(100)", nullable = false)
     @Enumerated(EnumType.STRING)
     private PickupState state;
 
-    @Column(name = "center_id")
+    @Column(name = "center_id", nullable = false)
     private Long centerId;
 
-    @Column(name = "create_at")
+    @Column(name = "create_at", nullable = false)
     @CreationTimestamp
     private LocalDateTime createAt;
 
-    @Column(name = "modify_at")
+    @Column(name = "modify_at", nullable = false)
     @UpdateTimestamp
     private LocalDateTime modifyAt;
 

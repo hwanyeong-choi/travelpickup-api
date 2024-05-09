@@ -17,19 +17,19 @@ public class PickupCenter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pickupCenterId;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "address")
+    @Column(name = "address", nullable = false)
     private String address;
 
-    @Column(name = "address_detail")
+    @Column(name = "address_detail", nullable = false)
     private String addressDetail;
 
-    @Column(name = "latitude", columnDefinition = "DECIMAL(10, 8")
+    @Column(name = "latitude", columnDefinition = "DECIMAL(10, 8)", nullable = false)
     private Double latitude;
 
-    @Column(name = "longitude", columnDefinition = "DECIMAL(10, 8")
+    @Column(name = "longitude", columnDefinition = "DECIMAL(10, 8)", nullable = false)
     private Double longitude;
 
     @Builder

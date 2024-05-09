@@ -8,7 +8,7 @@ import com.travelpickup.member.dto.KakaoUserMeResponseDto;
 import com.travelpickup.member.dto.LoginResponseDto;
 import com.travelpickup.member.repository.TravelPickupManagerRepository;
 import com.travelpickup.member.repository.TravelPickupUserRepository;
-import com.travelpickup.member.util.JWTUtil;
+import com.travelpickup.secutiry.util.JWTUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

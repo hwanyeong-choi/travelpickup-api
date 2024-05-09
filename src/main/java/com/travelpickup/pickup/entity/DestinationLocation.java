@@ -19,19 +19,19 @@ public class DestinationLocation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long destinationLocationId;
 
-    @Column(name = "pickup_id")
+    @Column(name = "pickup_id", nullable = false)
     private Long pickupId;
 
-    @Column(name = "address")
+    @Column(name = "address", nullable = false)
     private String address;
 
-    @Column(name = " address_detail")
+    @Column(name = " address_detail", nullable = false)
     private String addressDetail;
 
-    @Column(name = "latitude", columnDefinition = "DECIMAL(10, 8")
+    @Column(name = "latitude", columnDefinition = "DECIMAL(10, 8)", nullable = false)
     private Double latitude;
 
-    @Column(name = "longitude", columnDefinition = "DECIMAL(10, 8")
+    @Column(name = "longitude", columnDefinition = "DECIMAL(10, 8)", nullable = false)
     private Double longitude;
 
 

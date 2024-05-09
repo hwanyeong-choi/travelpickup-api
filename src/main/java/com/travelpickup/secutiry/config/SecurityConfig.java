@@ -2,9 +2,8 @@ package com.travelpickup.secutiry.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.travelpickup.common.filter.RequestInforFilter;
-import com.travelpickup.member.enums.TravelPickupManagerRole;
 import com.travelpickup.secutiry.filter.JWTFilter;
-import com.travelpickup.member.util.JWTUtil;
+import com.travelpickup.secutiry.util.JWTUtil;
 import com.travelpickup.secutiry.handler.JwtAuthenticationEntryPoint;
 import com.travelpickup.secutiry.handler.TravelPickupAccessDeniedHandler;
 import org.springframework.context.annotation.Bean;
