@@ -31,7 +31,7 @@ public class Pickup {
     @Enumerated(EnumType.STRING)
     private PickupState state;
 
-    @Column(name = "center_id", nullable = false)
+    @Column(name = "center_id", nullable = true)
     private Long centerId;
 
     @Column(name = "create_at", nullable = false)
