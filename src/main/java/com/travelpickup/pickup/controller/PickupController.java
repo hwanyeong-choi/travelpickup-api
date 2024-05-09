@@ -7,6 +7,9 @@ import com.travelpickup.pickup.dto.request.PickUpRegisterRequestDto;
 import com.travelpickup.pickup.dto.response.PickupDetailResponseDto;
 import com.travelpickup.pickup.service.PickupSearchService;
 import com.travelpickup.pickup.service.PickupService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +33,11 @@ public class PickupController {
 
     @PostMapping
     public ResponseEntity<String> registerPickup(@CurrentUser LoginUser loginUser,
-                                                 @RequestPart(required = true) PickUpRegisterRequestDto pickUpRegisterRequestDto,
+                                                 @Valid
+                                                 @RequestPart(required = true)
+                                                 PickUpRegisterRequestDto pickUpRegisterRequestDto,
+                                                 @NotNull(message = "값이 null일 수 없습니다.")
+                                                 @NotEmpty(message = "값이 비어있을 수 없습니다.")
                                                  @RequestPart(required = true) List<MultipartFile> pickupProductsPhotoFiles) throws IOException {
         pickupService.pickupSave(pickUpRegisterRequestDto, pickupProductsPhotoFiles, loginUser.getId());
         return ResponseEntity
