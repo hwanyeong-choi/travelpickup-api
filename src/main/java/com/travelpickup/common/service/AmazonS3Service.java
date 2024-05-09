@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -35,7 +34,7 @@ public class AmazonS3Service {
         List<String> pickupImagePathList = new ArrayList<>();
 
         for (MultipartFile multipartFile : multipartFileList) {
-            pickupImagePathList.add(uploadFileToS3(multipartFile, PICKUP_IMG_FILE_PREFIX + pickupId));
+            pickupImagePathList.add(uploadPickupImageFile(multipartFile, PICKUP_IMG_FILE_PREFIX + pickupId));
         }
 
         return pickupImagePathList;
@@ -49,7 +48,7 @@ public class AmazonS3Service {
         return Base64.getEncoder().encodeToString(bytes);
     }
 
-    private String uploadFileToS3(MultipartFile multipartFile, String fileName) throws IOException {
+    private String uploadPickupImageFile(MultipartFile multipartFile, String fileName) throws IOException {
         String uniqueFileName = UUID.randomUUID().toString() + "_" + fileName;
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.setContentLength(multipartFile.getSize());
