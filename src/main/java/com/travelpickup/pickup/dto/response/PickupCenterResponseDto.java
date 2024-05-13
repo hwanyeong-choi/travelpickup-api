@@ -11,7 +11,9 @@ public class PickupCenterResponseDto {
 
     private String name;
 
-    private String description;
+    private String address;
+
+    private String addressDetail;
 
     private Double latitude;
 
@@ -20,12 +22,14 @@ public class PickupCenterResponseDto {
     @Builder
     public PickupCenterResponseDto(Long id,
                                    String name,
-                                   String description,
+                                   String address,
+                                   String addressDetail,
                                    Double latitude,
                                    Double longitude) {
         this.id = id;
         this.name = name;
-        this.description = description;
+        this.address = address;
+        this.addressDetail = addressDetail;
         this.latitude = latitude;
         this.longitude = longitude;
     }
@@ -35,7 +39,8 @@ public class PickupCenterResponseDto {
                 .builder()
                 .id(pickupCenter.getPickupCenterId())
                 .name(pickupCenter.getName())
-                .description(pickupCenter.getAddress())
+                .address(pickupCenter.getAddress())
+                .addressDetail(pickupCenter.getAddressDetail())
                 .latitude(pickupCenter.getLatitude())
                 .longitude(pickupCenter.getLongitude())
                 .build();
