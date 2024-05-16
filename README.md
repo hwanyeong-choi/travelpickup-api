@@ -3,7 +3,7 @@
 # TravelPickup Backend
 
 ## WireFrames
-[TravelPickup.pdf](https://github.com/hwanyeong-choi/travelpickup-api/files/15333817/TravelPickup.pdf)
+[WireFrames: TravelPickup.pdf](https://github.com/hwanyeong-choi/travelpickup-api/files/15333817/TravelPickup.pdf)
 
 
 ## Tech Stack
