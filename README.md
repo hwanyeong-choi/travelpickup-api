@@ -4,7 +4,6 @@
 # TrabelPickup Backend
 
 ## Tech Stack
-![spring-color](https://github.com/hwanyeong-choi/travelpickup-api/assets/47169718/429b02b5-e027-4d9c-a369-b7e5f5c24998)![spring](https://github.com/hwanyeong-choi/travelpickup-api/assets/47169718/1603a7c8-4092-4c9d-89ef-8db9538fb0bd)
 
 ## Local 개발환경 설정
 
