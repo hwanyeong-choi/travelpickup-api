@@ -35,6 +35,6 @@
 
 ## 개선해야하는 부분
   1. Spock Test Code 추가 작성 (커버리지 90%이상 확보 그라운드룰)
-  2. CI/CD 구현 GitAction(Build, test), AWS(ECS, ECR)
+  2. CI/CD 구현 GitAction(Build, test), AWS(ECS, ECR, EC2)
   3. RDS master slave 환경 구현
   4. 기능기반 아키텍처에서 -> 헥사고날 아키텍처로 시도가 필요
