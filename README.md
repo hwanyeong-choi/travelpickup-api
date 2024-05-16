@@ -2,6 +2,10 @@
 
 # TravelPickup Backend
 
+## WireFrames
+[TravelPickup.pdf](https://github.com/hwanyeong-choi/travelpickup-api/files/15333817/TravelPickup.pdf)
+
+
 ## Tech Stack
 <img src="https://github.com/hwanyeong-choi/travelpickup-api/assets/47169718/d506e521-b290-492c-9b22-35ac81d0a8f3" alt="Spring" width="58" height="58">
 <img src="https://github.com/hwanyeong-choi/travelpickup-api/assets/47169718/9ef38db0-43f8-4fa3-a644-2fb0d8948e94" alt="Spring Boot" width="58" height="58">
