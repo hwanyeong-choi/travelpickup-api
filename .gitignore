@@ -41,7 +41,6 @@ out/
 application.yml
 
 settings.gradle
-build.gradle
 gradlew
 gradlew.bat
 gradle/*
