@@ -3,7 +3,7 @@
 # TravelPickup Backend
 
 ## WireFrames
-[TravelPickup.pdf](https://github.com/hwanyeong-choi/travelpickup-api/files/15333817/TravelPickup.pdf)
+<iframe width="768" height="432" src="https://miro.com/app/live-embed/uXjVKV3HeHA=/?moveToViewport=-1620,-2341,4435,3278&embedId=297698156207" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>
 
 
 ## Tech Stack
