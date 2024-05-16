@@ -28,7 +28,7 @@
 
 ### Docker
   1. docker, docker-compose 설치 진행
-  2. /infra 디렉토리로 이동
+  2. /infra 디렉토리로 이동: cd /infra
   3. mariadb, localstack 컨테이너 생성: docker-compose up -d
 
 ### Bucket
