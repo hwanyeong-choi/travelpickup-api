@@ -46,4 +46,4 @@ gradlew.bat
 gradle/*
 
 ### Docker ###
-/infra/data
+infra/data
