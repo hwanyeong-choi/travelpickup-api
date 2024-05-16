@@ -45,3 +45,4 @@ FrontEnd Github Repository: [travelpickup-front](https://github.com/hwanyeong-ch
   3. RDS master slave 환경 구현
   4. 기능기반 아키텍처에서 -> 헥사고날 아키텍처로 시도가 필요
   5. WebSoket으로 실시간 배송상태 알림 전송 구현
+  6. Swagger Restdocs Rest Api 문서화
