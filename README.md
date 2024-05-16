@@ -7,8 +7,8 @@
 <img src="https://github.com/hwanyeong-choi/travelpickup-api/assets/47169718/9ef38db0-43f8-4fa3-a644-2fb0d8948e94" alt="Spring Boot" width="58" height="58">
 <img src="https://github.com/hwanyeong-choi/travelpickup-api/assets/47169718/78ff3945-b252-4e44-bf91-24847295358a" alt="Spring Boot Security" width="58" height="58">
 <img src="https://github.com/hwanyeong-choi/travelpickup-api/assets/47169718/21f6def1-3cfa-4700-8051-b3da5110b800" alt="hibernate" width="58" height="58">
-<img src="https://github.com/hwanyeong-choi/travelpickup-api/assets/47169718/ebac2cd2-b1bc-41f4-a148-ca9592c3f245" alt="kakao" width="58" height="58">
 <img src="https://github.com/hwanyeong-choi/travelpickup-api/assets/47169718/37d57014-277d-430a-9d63-fb3391dc9d32" alt="mariadb" width="58" height="58">
+<img src="https://github.com/hwanyeong-choi/travelpickup-api/assets/47169718/ebac2cd2-b1bc-41f4-a148-ca9592c3f245" alt="kakao" width="58" height="58">
 
 ## VCS: Version Control System
 <img src="https://github.com/hwanyeong-choi/travelpickup-api/assets/47169718/3163513f-78b6-4906-83ac-ac143cebd0a8" alt="github" width="58" height="58">
