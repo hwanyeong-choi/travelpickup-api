@@ -22,8 +22,6 @@
 ## Test
 <img src="https://github.com/hwanyeong-choi/travelpickup-api/assets/47169718/a6c205b7-b25a-43a0-a079-069738582665" alt="spock" width="58" height="58">
 
-
-
 ## Local 개발환경 설정
 
 ### Docker
@@ -34,3 +32,9 @@
 ### Docker LocalStack Amazon S3 Bucket
   1. Docker 로컬 컨테이너 환경 구현
   2. LocalStack S3 Bucket 생성: aws --endpoint-url=http://localhost:4566 s3 mb s3://pickupimg
+
+## 개선해야하는 부분
+  1. Spock Test Code 추가 작성 (커버리지 90%이상 확보 그라운드룰)
+  2. CI/CD 구현 GitAction(Build, test), AWS(ECS, ECR)
+  3. RDS master slave 환경 구현
+  4. 기능기반 아키텍처에서 -> 헥사고날 아키텍처로 시도가 필요
