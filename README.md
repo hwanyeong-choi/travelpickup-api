@@ -3,7 +3,7 @@
 # TravelPickup Backend
 
 ## WireFrames
-<iframe width="768" height="432" src="https://miro.com/app/live-embed/uXjVKV3HeHA=/?moveToViewport=-1620,-2341,4435,3278&embedId=297698156207" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>
+![miro](https://miro.com/welcomeonboard/c0lPMHQwY2poM204VXFSQ3ZLOUgxbTZRTVQyRW1WaGE1M0IxYVFBWURJZzZvdmRHSkZHZjM3c09UY1pSQ040UXwzNDU4NzY0NTUxMzI1NTk1NDUzfDI=?share_link_id=922024720079)
 
 
 ## Tech Stack
