@@ -31,6 +31,6 @@
   2. /infra 디렉토리로 이동: cd /infra
   3. mariadb, localstack 컨테이너 생성: docker-compose up -d
 
-### Bucket
+### Docker LocalStack Amazon S3 Bucket
   1. Docker 로컬 컨테이너 환경 구현
   2. LocalStack S3 Bucket 생성: aws --endpoint-url=http://localhost:4566 s3 mb s3://pickupimg
