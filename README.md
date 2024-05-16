@@ -6,7 +6,7 @@
 ## Tech Stack
 
 ## Local 개발환경 설정
-<img src="https://github.com/hwanyeong-choi/travelpickup-api/assets/47169718/d506e521-b290-492c-9b22-35ac81d0a8f3" alt="Spring" width="76" height="76">
+<img src="https://github.com/hwanyeong-choi/travelpickup-api/assets/47169718/d506e521-b290-492c-9b22-35ac81d0a8f3" alt="Spring" width="58" height="58">
 
 
 ### Docker
