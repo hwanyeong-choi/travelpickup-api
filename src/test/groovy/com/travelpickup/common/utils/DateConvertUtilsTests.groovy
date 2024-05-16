@@ -17,7 +17,7 @@ class DateConvertUtilsTests extends Specification {
         LocalDateTime.of(2024, 4, 20, 0, 0, 0)  |   "2024. 04. 20"
         LocalDateTime.of(2023, 1, 20, 0, 0, 0)  |   "2023. 01. 20"
         LocalDateTime.of(2020, 4, 20, 0, 0, 0)  |   "2020. 04. 20"
-        LocalDateTime.of(2020, 4, 21, 0, 0, 0)  |   "2020. 04. 22"
+        LocalDateTime.of(2020, 4, 21, 0, 0, 0)  |   "2020. 04. 21"
 
     }
 
