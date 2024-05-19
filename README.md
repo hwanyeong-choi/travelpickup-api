@@ -1,6 +1,9 @@
 
 
 # TravelPickup Backend
+트레블 픽업은 여행중 구매한 물품들이 숙소로 돌아가기까지 짐이되는 문제를 해소하기 위해 기획한 서비스 입니다.
+간편하게 웹으로 픽업신청후 쇼핑몰이 밀집된 지역에 위치한 픽업세너로 방문하여 간편하게 큐알코드로 접수하면 
+당일 오후 8시까지 안전하게 숙소에서 구매한 물품을 받아보실 수 있습니다.
 
 ## WireFrames
 Miro Link: [Miro Link](https://miro.com/welcomeonboard/c0lPMHQwY2poM204VXFSQ3ZLOUgxbTZRTVQyRW1WaGE1M0IxYVFBWURJZzZvdmRHSkZHZjM3c09UY1pSQ040UXwzNDU4NzY0NTUxMzI1NTk1NDUzfDI=?share_link_id=922024720079)
@@ -45,3 +48,5 @@ FrontEnd Github Repository: [travelpickup-front](https://github.com/hwanyeong-ch
   3. RDS master slave 환경 구현
   4. 기능기반 아키텍처에서 -> 헥사고날 아키텍처로 시도가 필요
   5. WebSoket으로 실시간 배송상태 알림 전송 구현
+  6. Swagger Restdocs Rest Api 문서화
+  7. Spring Security redis를 활용한 refresh token기능 추가
