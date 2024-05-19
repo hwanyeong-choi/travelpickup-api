@@ -3,11 +3,12 @@ package com.travelpickup.secutiry.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.travelpickup.common.filter.RequestInforFilter;
 import com.travelpickup.secutiry.filter.JWTFilter;
-import com.travelpickup.secutiry.util.JWTUtil;
 import com.travelpickup.secutiry.handler.JwtAuthenticationEntryPoint;
 import com.travelpickup.secutiry.handler.TravelPickupAccessDeniedHandler;
+import com.travelpickup.secutiry.util.JWTUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -22,9 +23,10 @@ import org.springframework.web.cors.CorsConfiguration;
 
 import java.util.Collections;
 
+@Profile("prod")
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+public class SecurityConfigProd {
 
     private final AuthenticationConfiguration authenticationConfiguration;
 
@@ -32,9 +34,9 @@ public class SecurityConfig {
 
     private final JWTUtil jwtUtil;
 
-    public SecurityConfig(AuthenticationConfiguration authenticationConfiguration,
-                          JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
-                          JWTUtil jwtUtil) {
+    public SecurityConfigProd(AuthenticationConfiguration authenticationConfiguration,
+                              JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
+                              JWTUtil jwtUtil) {
         this.authenticationConfiguration = authenticationConfiguration;
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
         this.jwtUtil = jwtUtil;
