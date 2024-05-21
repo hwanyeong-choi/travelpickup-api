@@ -1,22 +1,31 @@
 package com.travelpickup.pickup.dto.response;
 
 import com.travelpickup.pickup.entity.PickupCenter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Schema(description = "PickupCenter 정보 DTO")
 public class PickupCenterResponseDto {
 
+    @Schema(description = "픽업센터 아이디")
     private Long id;
 
+    @Schema(description = "픽업센터명")
     private String name;
 
+    @Schema(description = "픽업센터 주소")
     private String address;
 
+    @Schema(description = "픽업센터 상세주소")
     private String addressDetail;
 
+    @Schema(description = "위도")
     private Double latitude;
 
+    @Schema(description = "경도")
     private Double longitude;
 
     @Builder

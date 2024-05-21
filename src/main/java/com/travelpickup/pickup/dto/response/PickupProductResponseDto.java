@@ -1,16 +1,21 @@
 package com.travelpickup.pickup.dto.response;
 
 import com.travelpickup.pickup.entity.PickupProduct;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
+@Schema(description = "픽업 물품 Dto")
 public class PickupProductResponseDto {
 
+    @Schema(description = "물품명")
     private String name;
 
+    @Schema(description = "물품 개수")
     private Long quantity;
 
+    @Schema(description = "물품 사진정보 base64")
     private String productImgByBase64;
 
     @Builder

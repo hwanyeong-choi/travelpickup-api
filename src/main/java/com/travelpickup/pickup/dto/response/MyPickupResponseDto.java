@@ -1,14 +1,19 @@
 package com.travelpickup.pickup.dto.response;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
 
 import java.util.List;
 
 @Getter
+@Schema(description = "픽업신청 내역 조회 Dto")
 public class MyPickupResponseDto {
 
+    @Schema(description = "진행중인 픽업 Dto List")
     private List<PickupResponseDto> inProgressPickupList;
+
+    @Schema(description = "종료된 픽업 Dto List")
     private List<PickupResponseDto> finishPickupList;
 
     @Builder
