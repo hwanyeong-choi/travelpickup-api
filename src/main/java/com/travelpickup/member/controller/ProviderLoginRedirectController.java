@@ -26,8 +26,7 @@ public class ProviderLoginRedirectController {
     }
 
     @Operation(summary = "Kakao 소셜 로그인 리다이렉트", description = "kakao 소셜 로그인 리다이렉트 Api")
-    @ApiResponse(
-            responseCode = "302",
+    @ApiResponse(responseCode = "302",
             description = "Kakao Login Redirect",
             headers = @Header(name = "location", description = "Kakao Login Redirect Url", schema = @Schema(type = "string")))
     @GetMapping("/kakao")
