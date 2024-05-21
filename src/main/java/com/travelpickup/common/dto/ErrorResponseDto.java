@@ -2,18 +2,23 @@ package com.travelpickup.common.dto;
 
 import com.travelpickup.common.error.TravelPickupErrorType;
 import com.travelpickup.common.exception.TravelPickupServiceException;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
 
 import static com.travelpickup.common.error.TravelPickupValidationErrorType.TRAVEL_PICKUP_VALIDATION_ERROR;
 
 @Getter
+@Schema(description = "TravelPickup Error Dto")
 public class ErrorResponseDto {
 
+    @Schema(description = "에러 타입")
     private TravelPickupErrorType errorType;
 
+    @Schema(description = "Api 엔드포인트")
     private String path;
 
+    @Schema(description = "에러 메세지")
     private String message;
 
     @Builder
