@@ -1,5 +1,3 @@
-
-
 # TravelPickup Backend
 트레블 픽업은 여행중 구매한 물품들이 숙소로 돌아가기까지 짐이되는 문제를 해소하기 위해 기획한 서비스 입니다.
 간편하게 웹으로 픽업신청후 쇼핑몰이 밀집된 지역에 위치한 픽업세너로 방문하여 간편하게 큐알코드로 접수하면 
@@ -18,6 +16,8 @@ FrontEnd Github Repository: [travelpickup-front](https://github.com/hwanyeong-ch
 <img src="https://github.com/hwanyeong-choi/travelpickup-api/assets/47169718/21f6def1-3cfa-4700-8051-b3da5110b800" alt="hibernate" width="58" height="58">
 <img src="https://github.com/hwanyeong-choi/travelpickup-api/assets/47169718/37d57014-277d-430a-9d63-fb3391dc9d32" alt="mariadb" width="58" height="58">
 <img src="https://github.com/hwanyeong-choi/travelpickup-api/assets/47169718/ebac2cd2-b1bc-41f4-a148-ca9592c3f245" alt="kakao" width="58" height="58">
+<img src="https://github.com/hwanyeong-choi/travelpickup-api/assets/47169718/04c7be05-da95-4375-bd26-bde1feff2749" alt="swagger" width="58" height="58">
+
 
 ## VCS: Version Control System
 <img src="https://github.com/hwanyeong-choi/travelpickup-api/assets/47169718/3163513f-78b6-4906-83ac-ac143cebd0a8" alt="github" width="58" height="58">
