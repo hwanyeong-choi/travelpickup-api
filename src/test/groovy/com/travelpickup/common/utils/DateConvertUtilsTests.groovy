@@ -13,11 +13,11 @@ class DateConvertUtilsTests extends Specification {
         DateConvertUtils.localDateConvert(currentLocalDateTime, DateConvertUtils.YYYY_DOT_MM_DOT_DD_PATTERN) == currentLocalDateTimeByStr
 
         where:
-        currentLocalDateTime                    |   currentLocalDateTimeByStr
-        LocalDateTime.of(2024, 4, 20, 0, 0, 0)  |   "2024. 04. 20"
-        LocalDateTime.of(2023, 1, 20, 0, 0, 0)  |   "2023. 01. 20"
-        LocalDateTime.of(2020, 4, 20, 0, 0, 0)  |   "2020. 04. 20"
-        LocalDateTime.of(2020, 4, 21, 0, 0, 0)  |   "2020. 04. 21"
+        currentLocalDateTime                   | currentLocalDateTimeByStr
+        LocalDateTime.of(2024, 4, 20, 0, 0, 0) | "2024. 04. 20"
+        LocalDateTime.of(2023, 1, 20, 0, 0, 0) | "2023. 01. 20"
+        LocalDateTime.of(2020, 4, 20, 0, 0, 0) | "2020. 04. 20"
+        LocalDateTime.of(2020, 4, 21, 0, 0, 0) | "2020. 04. 21"
 
     }
 

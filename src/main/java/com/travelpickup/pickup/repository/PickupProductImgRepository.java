@@ -1,15 +1,15 @@
 package com.travelpickup.pickup.repository;
 
-import com.travelpickup.pickup.entity.PickupProductImg;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Optional;
+import com.travelpickup.pickup.entity.PickupProductImg;
 
 @Repository
 public interface PickupProductImgRepository extends JpaRepository<PickupProductImg, Long> {
 
-    Optional<PickupProductImg> findByPickupProductId(Long pickupProductId);
+	Optional<PickupProductImg> findByPickupProductId(Long pickupProductId);
 
 }

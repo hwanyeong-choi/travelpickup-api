@@ -1,14 +1,15 @@
 package com.travelpickup.pickup.repository;
 
-import com.travelpickup.pickup.entity.DestinationLocation;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import com.travelpickup.pickup.entity.DestinationLocation;
 
 @Repository
 public interface DestinationLocationRepository extends JpaRepository<DestinationLocation, Long> {
 
-    Optional<DestinationLocation> findByPickupId(Long pickupId);
+	Optional<DestinationLocation> findByPickupId(Long pickupId);
 
 }
