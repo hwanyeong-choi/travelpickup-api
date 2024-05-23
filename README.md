@@ -31,7 +31,8 @@ FrontEnd Github Repository: [travelpickup-front](https://github.com/hwanyeong-ch
 ## Test
 <img src="https://github.com/hwanyeong-choi/travelpickup-api/assets/47169718/a6c205b7-b25a-43a0-a079-069738582665" alt="spock" width="58" height="58">
 
-
+## Code Convention
+<img src="https://github.com/hwanyeong-choi/travelpickup-api/assets/47169718/b79da29a-a29f-4969-9c14-2964954a31fb" alt="naver" width="58" height="58">
 
 ## Swagger
 Local 환경에서만 활성화 경로: http://localhost:8080/swagger-ui/index.html
