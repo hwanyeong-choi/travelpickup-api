@@ -7,39 +7,38 @@ import lombok.Setter;
 @Setter
 public class KakaoUserMeResponseDto {
 
-    private Long id;
+	private Long id;
 
-    private String connected_at;
+	private String connected_at;
 
-    private Properties properties;
+	private Properties properties;
 
-    private KakaoAccount kakao_account;
+	private KakaoAccount kakao_account;
 
+	@Getter
+	@Setter
+	public static class Properties {
+		private String nickname;
+	}
 
-    @Getter
-    @Setter
-    public static class Properties {
-        private String nickname;
-    }
+	@Getter
+	@Setter
+	public static class KakaoAccount {
 
-    @Getter
-    @Setter
-    public static class KakaoAccount {
+		private Boolean profile_nickname_needs_agreement;
 
-        private Boolean profile_nickname_needs_agreement;
+		private Profile profile;
 
-        private Profile profile;
+	}
 
-    }
+	@Getter
+	@Setter
+	private static class Profile {
 
-    @Getter
-    @Setter
-    private static class Profile {
+		private String nickname;
 
-        private String nickname;
+		private Boolean is_default_nickname;
 
-        private Boolean is_default_nickname;
-
-    }
+	}
 
 }

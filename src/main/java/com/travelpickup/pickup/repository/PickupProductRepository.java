@@ -1,14 +1,15 @@
 package com.travelpickup.pickup.repository;
 
-import com.travelpickup.pickup.entity.PickupProduct;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import com.travelpickup.pickup.entity.PickupProduct;
 
 @Repository
 public interface PickupProductRepository extends JpaRepository<PickupProduct, Long> {
 
-    List<PickupProduct> findByPickupId(Long pickupId);
+	List<PickupProduct> findByPickupId(Long pickupId);
 
 }

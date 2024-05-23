@@ -2,12 +2,12 @@ package com.travelpickup.member.enums;
 
 public enum LoginProvider {
 
-    kakao("kakao");
+	kakao("kakao");
 
-    private String provierName;
+	private String provierName;
 
-    LoginProvider(String provierName) {
-        this.provierName = provierName;
-    }
+	LoginProvider(String provierName) {
+		this.provierName = provierName;
+	}
 
 }
